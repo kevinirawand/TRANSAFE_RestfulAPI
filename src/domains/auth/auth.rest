@@ -1,0 +1,18 @@
+###
+POST http://localhost:1337/api/v1/auth/register
+Content-Type: application/json
+
+{
+   "username": "Surono Degleng",
+   "password": "12345",
+   "passwordConfirmation": "12345"
+}
+
+###
+POST http://localhost:1337/api/v1/auth/login
+Content-Type: application/json
+
+{
+   "username": "kevin",
+   "password": "12345"
+}

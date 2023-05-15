@@ -1,0 +1,11 @@
+POST http://localhost:1337/api/v1/transaction
+Content-Type: application/json
+
+{
+   "nama_produk": "HP Samsung A04s",
+   "harga": 2500000,
+   "images": "./images/test.png",
+   "method": "gopay",
+   "ref_to": "6285159436455",
+   "fee_responsibility": "penjual"
+}

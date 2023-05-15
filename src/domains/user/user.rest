@@ -1,0 +1,30 @@
+GET http://localhost:1337/api/v1/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInVzZXJuYW1lIjoia2V2aW4iLCJpYXQiOjE2ODM5MTg5NDUsImV4cCI6MTY4NDUyMzc0NX0.9gdX4vR5dJS0UazEdxs65-Pfeya2BFT9SvktEmdOf3Y
+
+
+###
+POST http://localhost:1337/api/v1/user/create
+Content-Type: application/json
+
+{
+   "id": 4,
+   "name": "Joko",
+   "age": 21
+}
+
+###
+GET http://localhost:1337/api/v1/user/show/2
+
+###
+PUT http://localhost:1337/api/v1/user/update/2
+Content-Type: application/json
+
+{
+   "id": 2,
+   "name": "Ikhsan Panjng",
+   "age": 20
+}
+
+###
+DELETE http://localhost:1337/api/v1/user/delete/2
+
