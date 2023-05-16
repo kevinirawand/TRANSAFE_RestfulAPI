@@ -1,12 +1,22 @@
-const WebSocket = require('ws');
+const express = require("express");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 
-const server = new WebSocket.Server({ port: 1233 });
+const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer);
 
-server.on('connection', (ws) => {
-   console.info('New Client Connected');
-
-   ws.on('message', (message) => {
-      console.info(message);
-      ws.send(`Your message : ${message}`);
+io.on("connection", (socket) => {
+   socket.join("anomynous_group");
+   console.info("Server Connected");
+   socket.ion('sendMsg', (msg) => {
+      console.info("msg", msg);
+      io.to("anomynoys_group").emit("sendMsgServer", { ...msg, type: "otherMsg" });
    });
+});
+
+const port = 3000;
+
+httpServer.listen(port, () => {
+   console.info(`Server running on port ${port}`);
 });

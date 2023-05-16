@@ -3,8 +3,12 @@ import { Model } from 'sequelize';
 
 interface UserAttributes {
    id: number;
+   name: string;
    username: string;
+   phone_number: number;
+   email: string;
    password: string;
+   balance?: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -15,8 +19,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
        * The `models/index` file will call this method automatically.
        */
       id!: number;
+      name!: string;
       username!: string;
+      phone_number!: number;
+      email!: string;
       password!: string;
+      balance?: number;
       static associate(models: any) {
          // define association here
       }
@@ -29,13 +37,30 @@ module.exports = (sequelize: any, DataTypes: any) => {
             autoIncrement: true,
             primaryKey: true,
          },
+         name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+         },
          username: {
+            type: DataTypes.STRING,
+            allowNull: false,
+         },
+         phone_number: {
+            type: DataTypes.STRING,
+            allowNull: false,
+         },
+         email: {
             type: DataTypes.STRING,
             allowNull: false,
          },
          password: {
             type: DataTypes.STRING,
             allowNull: false,
+         },
+         balance: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+            defaultValue: 0,
          },
       },
       {

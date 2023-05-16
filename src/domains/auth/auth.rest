@@ -3,7 +3,10 @@ POST http://localhost:1337/api/v1/auth/register
 Content-Type: application/json
 
 {
-   "username": "Surono Degleng",
+   "name": "Kevin Irawan Daniswara",
+   "username": "Kevin ID",
+   "phone_number": "6285159436455",
+   "email": "kevinid@gmail.com",
    "password": "12345",
    "passwordConfirmation": "12345"
 }
@@ -13,6 +16,6 @@ POST http://localhost:1337/api/v1/auth/login
 Content-Type: application/json
 
 {
-   "username": "kevin",
+   "username": "Kevin ID",
    "password": "12345"
 }

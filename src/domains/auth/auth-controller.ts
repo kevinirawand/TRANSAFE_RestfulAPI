@@ -7,7 +7,6 @@ import { DUPLICATE_FOUND, INVALID_CREDENTIALS } from '../../errors/error-codes';
 
 class AuthController {
    public register = async (req: Request, res: Response): Promise<Response> => {
-      console.info(db.User);
       const user = await db.User.findOne({
          where: {
             username: req.body.username,
@@ -25,7 +24,10 @@ class AuthController {
       const hashPassword: string = await AuthUtils.hash(req.body.password);
 
       await db.User.create({
+         name: req.body.name,
          username: req.body.username,
+         phone_number: req.body.phone_number,
+         email: req.body.email,
          password: hashPassword,
       });
 
