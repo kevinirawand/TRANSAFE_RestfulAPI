@@ -18,7 +18,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
       public buyer_id!: number;
       static associate(models: any) {
          // define association here
-   }
+         Room.hasOne(models.Transaction);
+      }
    }
    Room.init(
       {

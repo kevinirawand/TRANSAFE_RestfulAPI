@@ -27,6 +27,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
       public status?: string;
       static associate(models: any) {
          // define association here
+         Transaction.belongsTo(models.Room, {
+            as: 'room',
+            foreignKey: 'room_id',
+         });
+         Transaction.belongsTo(models.Product, {
+            as: 'product',
+            foreignKey: 'product_id',
+         });
       }
    }
    Transaction.init(
@@ -40,10 +48,18 @@ module.exports = (sequelize: any, DataTypes: any) => {
          product_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            references: {
+               model: 'Product',
+               key: 'id',
+            },
          },
          room_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.UUID,
             allowNull: false,
+            references: {
+               model: 'Room',
+               key: 'id',
+            },
          },
          tax: {
             type: DataTypes.DECIMAL,

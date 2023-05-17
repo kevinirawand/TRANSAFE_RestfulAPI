@@ -46,7 +46,18 @@ class TransactionService {
             },
          );
 
-         return result;
+         const results = await db.Transaction.findOne({
+            where: {
+               id: result.id,
+            },
+            include: [
+               { model: db.Product, as: 'product' },
+               { model: db.Room, as: 'room' },
+            ],
+            attributes: { exclude: ['ProductId', 'RoomId'] },
+         });
+
+         return results;
       } catch (error: any) {
          throw new BaseError(
             INVALID_DATABASE_PROCESS,
