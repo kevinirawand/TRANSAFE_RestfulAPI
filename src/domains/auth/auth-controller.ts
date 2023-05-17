@@ -32,7 +32,7 @@ class AuthController {
       });
 
       return res.status(200).json({
-         code: 200,
+         code: 'SUCCESS_REGISTER',
          status: 'OK',
          data: {
             message: 'Register Success!',
@@ -62,7 +62,7 @@ class AuthController {
       let accessToken: string = AuthUtils.generateToken(user.id, user.username);
 
       return res.status(200).json({
-         code: 200,
+         code: 'SUCCESS_LOGIN',
          status: 'OK',
          data: {
             accessToken: accessToken,

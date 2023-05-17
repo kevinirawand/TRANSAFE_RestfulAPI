@@ -5,3 +5,4 @@ export const SERVER_PROBLEM: string = 'SERVER_ERR_001';
 export const ACCESS_DENIED: string = 'ACCESS_DENIED';
 export const DUPLICATE_FOUND: string = 'DUPLICATE_FOUND';
 export const INVALID_DATABASE_PROCESS: string = 'DATABASE_ROLLBACK_PROCESS';
+export const FIALED_DATABASE_PROCESS: string = 'FAILED_DATABASE_PROCESS';

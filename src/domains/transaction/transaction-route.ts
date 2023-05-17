@@ -12,6 +12,18 @@ class TransactionRoute extends BaseRoutes {
          [authToken, validateCredentials(createTransactionSchema)],
          tryCatch(transactionController.createTransaction),
       );
+
+      this.router.get(
+         '/:transaction_id',
+         [authToken],
+         tryCatch(transactionController.getOneTransaction),
+      );
+
+      this.router.put(
+         '/:transaction_id',
+         [authToken],
+         tryCatch(transactionController.updateStatusTransaction),
+      );
    }
 }
 

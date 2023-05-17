@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import db from '../../models';
 import TransactionService from './transaction-service';
 
 class TransactionController {
@@ -22,13 +21,46 @@ class TransactionController {
 
       const transaction = await TransactionService.createTransaction(data);
 
-      
-
       return res.status(200).json({
          code: 'SUCCESS_CREATE_TRANSACTION',
          status: 'OK',
          data: {
             transaction,
+         },
+      });
+   };
+
+   public getOneTransaction = async (
+      req: Request,
+      res: Response,
+   ): Promise<Response> => {
+      const result = await TransactionService.findById(
+         parseInt(req.params.transaction_id || '-1'),
+      );
+
+      return res.status(200).json({
+         code: 'SUCCESS_GET_ONE_TRANSACTION',
+         status: 'OK',
+         data: {
+            result,
+         },
+      });
+   };
+
+   public updateStatusTransaction = async (
+      req: Request,
+      res: Response,
+   ): Promise<Response> => {
+      await TransactionService.updateStatus(
+         parseInt(req.params.transaction_id || '-1'),
+         req.body.status,
+      );
+
+      return res.status(200).json({
+         code: 'SUCCESS_UPDATE_TRANSACTION',
+         status: 'OK',
+         data: {
+            message: 'Update Transaction Success!',
          },
       });
    };

@@ -1,4 +1,7 @@
-import { INVALID_DATABASE_PROCESS } from '../../errors/error-codes';
+import {
+   FIALED_DATABASE_PROCESS,
+   INVALID_DATABASE_PROCESS,
+} from '../../errors/error-codes';
 import BaseError from '../../errors/error-mockup';
 import db from '../../models';
 import statusCodes from '../../errors/status-codes';
@@ -65,6 +68,41 @@ class TransactionService {
             error.message.toString(),
          );
       }
+   };
+
+   public findById = async (transaction_id: number): Promise<any> => {
+      return await db.Transaction.findOne({
+         where: {
+            id: transaction_id,
+         },
+         include: [
+            { model: db.Product, as: 'product' },
+            { model: db.Room, as: 'room' },
+         ],
+         attributes: { exclude: ['ProductId', 'RoomId'] },
+      });
+   };
+
+   public updateStatus = async (
+      transaction_id: number,
+      status: number,
+   ): Promise<any> => {
+      db.Transaction.update(
+         {
+            status: status,
+         },
+         {
+            where: {
+               id: transaction_id,
+            },
+         },
+      ).catch((err: any) => {
+         throw new BaseError(
+            FIALED_DATABASE_PROCESS,
+            statusCodes.BAD_REQUEST.message,
+            err.message.toString(),
+         );
+      });
    };
 }
 
