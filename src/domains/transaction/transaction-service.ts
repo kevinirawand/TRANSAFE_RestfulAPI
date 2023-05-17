@@ -166,6 +166,15 @@ class TransactionService {
 
       return true;
    };
+
+   public nego = async (
+      transaction_id: number,
+      amount: number,
+   ): Promise<any> => {
+      // cari transaksi by id
+      // if acc -> update transaction.product.price = amount
+      // else nothing to do
+   };
 }
 
 export default new TransactionService();

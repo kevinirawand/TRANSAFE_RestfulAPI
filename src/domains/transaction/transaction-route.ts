@@ -36,6 +36,12 @@ class TransactionRoute extends BaseRoutes {
          [authToken],
          tryCatch(transactionController.joinTransaction),
       );
+
+      this.router.post(
+         '/:transaction_id/nego/:amount',
+         [authToken],
+         tryCatch(transactionController.negoTransaction),
+      );
    }
 }
 
