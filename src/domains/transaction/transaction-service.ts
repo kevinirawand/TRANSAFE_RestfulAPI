@@ -1,6 +1,7 @@
 import {
    FIALED_DATABASE_PROCESS,
    INVALID_DATABASE_PROCESS,
+   INVALID_IDENTITY,
 } from '../../errors/error-codes';
 import BaseError from '../../errors/error-mockup';
 import db from '../../models';
@@ -86,7 +87,7 @@ class TransactionService {
    public updateStatus = async (
       transaction_id: number,
       status: number,
-   ): Promise<any> => {
+   ): Promise<boolean> => {
       db.Transaction.update(
          {
             status: status,
@@ -103,6 +104,8 @@ class TransactionService {
             err.message.toString(),
          );
       });
+
+      return true;
    };
 
    public getRecent = async (user_id: number): Promise<any> => {
@@ -127,6 +130,41 @@ class TransactionService {
       console.info(results);
 
       return results;
+   };
+
+   public join = async (room_id: string, user_id: number): Promise<boolean> => {
+      const room = await db.Room.findOne({
+         where: {
+            id: room_id,
+         },
+      });
+
+      if (room.seller_id == user_id) {
+         throw new BaseError(
+            INVALID_IDENTITY,
+            statusCodes.BAD_REQUEST.message,
+            "Buyer can't equal to seller!",
+         );
+      } else {
+         db.Room.update(
+            {
+               buyer_id: user_id,
+            },
+            {
+               where: {
+                  id: room_id,
+               },
+            },
+         ).catch((err: any) => {
+            throw new BaseError(
+               FIALED_DATABASE_PROCESS,
+               statusCodes.BAD_REQUEST.message,
+               err.message.toString(),
+            );
+         });
+      }
+
+      return true;
    };
 }
 

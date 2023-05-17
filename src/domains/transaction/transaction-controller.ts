@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import TransactionService from './transaction-service';
-import statusCodes from '../../errors/status-codes';
 
 class TransactionController {
    public createTransaction = async (
@@ -79,6 +78,24 @@ class TransactionController {
          status: 'OK',
          data: {
             results,
+         },
+      });
+   };
+
+   public joinTransaction = async (
+      req: Request,
+      res: Response,
+   ): Promise<Response> => {
+      const result = await TransactionService.join(
+         req.params.room_id || '',
+         req.app.locals.user.userId,
+      );
+
+      return res.status(200).json({
+         code: 'SUCCESS_JOIN_TRANSACTION',
+         status: 'OK',
+         data: {
+            message: 'Success join transaction!',
          },
       });
    };

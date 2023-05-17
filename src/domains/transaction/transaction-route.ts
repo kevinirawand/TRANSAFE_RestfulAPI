@@ -32,9 +32,9 @@ class TransactionRoute extends BaseRoutes {
       );
 
       this.router.post(
-         '/:transaction_id/room/:room_id',
+         '/join/:room_id',
          [authToken],
-         tryCatch(transactionController.getRecentTransaction),
+         tryCatch(transactionController.joinTransaction),
       );
    }
 }
