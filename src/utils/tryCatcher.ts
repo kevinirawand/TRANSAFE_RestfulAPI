@@ -7,7 +7,6 @@ const tryCatch =
       res: Response,
       next: NextFunction,
    ): Promise<any | Response> => {
-      req.body.test = 'test from try catch';
       try {
          await controller(req, res);
       } catch (err) {

@@ -2,9 +2,9 @@
 import { Model } from 'sequelize';
 
 interface RoomAttributes {
-   id: number;
-   id_seller: number;
-   id_buyer: number;
+   id: string;
+   seller_id: number;
+   buyer_id: number;
 }
 module.exports = (sequelize: any, DataTypes: any) => {
    class Room extends Model<RoomAttributes> implements RoomAttributes {
@@ -13,28 +13,28 @@ module.exports = (sequelize: any, DataTypes: any) => {
        * This method is not a part of Sequelize lifecycle.
        * The `models/index` file will call this method automatically.
        */
-      id!: number;
-      id_seller!: number;
-      id_buyer!: number;
+      public id!: string;
+      public seller_id!: number;
+      public buyer_id!: number;
       static associate(models: any) {
          // define association here
-      }
+   }
    }
    Room.init(
       {
          id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
+            defaultValue: DataTypes.UUIDV4,
          },
-         id_seller: {
+         seller_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
          },
-         id_buyer: {
+         buyer_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
          },
       },
       {

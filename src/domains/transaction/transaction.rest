@@ -1,11 +1,15 @@
 POST http://localhost:1337/api/v1/transaction
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
 {
-   "nama_produk": "HP Samsung A04s",
-   "harga": 2500000,
+   "category": "fisik",
+   "name": "HP Samsung A05s",
+   "desc": "Samsung A05s 4/64 minus pemakaian",
+   "price": 2500000,
+   "negotiable": false,
+   "shipping_fee": 26000,
+   "weight": 2000, 
    "images": "./images/test.png",
-   "method": "gopay",
-   "ref_to": "6285159436455",
-   "fee_responsibility": "penjual"
+   "tax": 10000
 }

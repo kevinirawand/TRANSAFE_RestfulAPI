@@ -3,47 +3,64 @@ import { Model } from 'sequelize';
 
 interface TransactionAttributes {
    id: number;
-   id_product: number;
-   id_room: number;
-   fee_rate: number;
-   method: string;
-   ref_to: number;
-   status: string;
+   product_id: number;
+   room_id: string;
+   tax: number;
+   negotiable?: boolean;
+   status?: string;
 }
 module.exports = (sequelize: any, DataTypes: any) => {
-   class Transaction extends Model {
+   class Transaction
+      extends Model<TransactionAttributes>
+      implements TransactionAttributes
+   {
       /**
        * Helper method for defining associations.
        * This method is not a part of Sequelize lifecycle.
        * The `models/index` file will call this method automatically.
        */
-      id!: number;
-      id_product!: number;
-      id_room!: number;
-      fee_rate!: number;
-      method!: string;
-      ref_to!: number;
-      status?: string;
+      public id!: number;
+      public product_id!: number;
+      public room_id!: string;
+      public tax!: number;
+      public negotiable?: boolean;
+      public status?: string;
       static associate(models: any) {
          // define association here
       }
    }
    Transaction.init(
       {
-         id_product: DataTypes.INTEGER,
-         id_room: DataTypes.INTEGER,
-         fee_rates: DataTypes.DECIMAL,
-         method: DataTypes.STRING,
-         ref_to: DataTypes.STRING,
+         id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+         },
+         product_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+         },
+         room_id: {
+            type: DataTypes.STRING,
+            allowNull: false,
+         },
+         tax: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+         },
+         negotiable: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+         },
          status: {
             type: DataTypes.ENUM(
-               'PEMBELI_BELUM_MELAKUKAN_TRANSFER',
-               'PEMBELI_BERHASIL_TRANSFER',
-               'PENJUAL_TELAH_MENGIRIM_PRODUK',
-               'MENUNGGU_KONFIRMASI_SELESAI_PEMBELI',
-               'TRANSAKSI_TELAH_SELESAI',
+               'JOIN',
+               'DIBAYAR',
+               'DIPROSES',
+               'DIKIRIM',
+               'SELESAI',
             ),
-            defaultValue: 'PEMBELI_BELUM_MELAKUKAN_TRANSFER',
          },
       },
       {

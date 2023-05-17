@@ -1,13 +1,21 @@
 import Joi from 'joi';
 
 export const createTransactionSchema = Joi.object({
-   nama_produk: Joi.string().required().min(5).max(50).messages({
+   category: Joi.string().required().valid('fisik', 'digital'),
+   name: Joi.string().min(5).max(30).required().messages({
       'string.min': 'Username must be at least 5 character',
-      'string.max': 'Username must be max 50 character',
+      'string.max': 'Username must be max 30 character',
    }),
-   harga: Joi.number().required(),
-   images: Joi.string().required(),
-   method: Joi.string().required(),
-   ref_to: Joi.string().min(12).max(15).required(),
-   fee_responsibility: Joi.string().valid('penjual', 'pembeli').required(),
+   desc: Joi.string().min(15).max(100).required().messages({
+      'string.min': 'Description must be at least 15 character',
+      'string.max': 'Description must be max 100 character',
+   }),
+   price: Joi.number().integer().required(),
+   negotiable: Joi.boolean(),
+   shipping_fee: Joi.number().integer(),
+   weight: Joi.number().integer(),
+   images: Joi.string()
+      .pattern(/\.(png|jpe?g)$/i)
+      .required(),
+   tax: Joi.number().required(),
 });

@@ -27,6 +27,10 @@ const errorHandler = (
          errors: errorObj,
       });
    }
+   
+   if (err.name == 'SequelizeValidationError') {
+      return res.status(400).json(err)
+   }
 
    if (err instanceof BaseError) {
       console.error(err);

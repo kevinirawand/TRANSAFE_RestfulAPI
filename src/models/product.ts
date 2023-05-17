@@ -3,6 +3,8 @@ import { Model } from 'sequelize';
 
 interface ProductAttributes {
    id: number;
+   category: string;
+   desc: string;
    name: string;
    price: number;
    images: string;
@@ -16,6 +18,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
        * The `models/index` file will call this method automatically.
        */
       public id!: number;
+      public category!: string;
+      public desc!: string;
       public name!: string;
       public price!: number;
       public images!: string;
@@ -38,6 +42,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
          },
          price: {
             type: DataTypes.DECIMAL,
+            allowNull: false,
+         },
+         category: {
+            type: DataTypes.STRING,
+            allowNull: false,
+         },
+         desc: {
+            type: DataTypes.STRING,
             allowNull: false,
          },
          images: {

@@ -8,6 +8,7 @@ interface UserAttributes {
    phone_number: number;
    email: string;
    password: string;
+   address?: string;
    balance?: number;
 }
 
@@ -24,6 +25,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       phone_number!: number;
       email!: string;
       password!: string;
+      address?: string;
       balance?: number;
       static associate(models: any) {
          // define association here
@@ -56,6 +58,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
          password: {
             type: DataTypes.STRING,
             allowNull: false,
+         },
+         address: {
+            type: DataTypes.STRING,
          },
          balance: {
             type: DataTypes.DECIMAL,
