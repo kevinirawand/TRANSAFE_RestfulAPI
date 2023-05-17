@@ -104,6 +104,37 @@ class TransactionService {
          );
       });
    };
+
+   public getRecent = async (user_id: number): Promise<any> => {
+      const results = await db.Transaction.findAll({
+         include: [
+            { model: db.Product, as: 'product' },
+            {
+               model: db.Room,
+               as: 'room',
+               where: {
+                  [db.Sequelize.Op.or]: [
+                     { buyer_id: user_id },
+                     { seller_id: user_id },
+                  ],
+               },
+            },
+         ],
+         attributes: { exclude: ['ProductId', 'RoomId'] },
+      });
+
+      console.info(`CURRENT USER LOGIN : ${user_id}`);
+      console.info(results);
+
+      return results;
+   };
 }
 
 export default new TransactionService();
+
+// where not tidak sesuai
+// where: {
+//    status: {
+//       [db.Sequelize.Op.not]: 'DIBATALKAN',
+//    },
+// },

@@ -1,3 +1,4 @@
+### CREATE TRANSACTION
 POST http://localhost:1337/api/v1/transaction
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
@@ -14,12 +15,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZ
    "tax": 10000
 }
 
-###
+### GET ONE TRANSACTION
 GET http://localhost:1337/api/v1/transaction/1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
-###
+### UPDATE STATUS TRANSACTION
 PUT http://localhost:1337/api/v1/transaction/1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
@@ -27,3 +28,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZ
 {
    "status": "JOIN"
 }
+
+### GET RECENT TRANSACTION
+GET http://localhost:1337/api/v1/transaction/recent/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
+
+
+

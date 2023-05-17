@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import TransactionService from './transaction-service';
+import statusCodes from '../../errors/status-codes';
 
 class TransactionController {
    public createTransaction = async (
@@ -61,6 +62,23 @@ class TransactionController {
          status: 'OK',
          data: {
             message: 'Update Transaction Success!',
+         },
+      });
+   };
+
+   public getRecentTransaction = async (
+      req: Request,
+      res: Response,
+   ): Promise<Response> => {
+      const results = await TransactionService.getRecent(
+         req.app.locals.user.userId,
+      );
+
+      return res.status(200).json({
+         code: 'SUCCESS_GET_RECENT_TRANSACTION',
+         status: 'OK',
+         data: {
+            results,
          },
       });
    };

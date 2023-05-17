@@ -24,6 +24,18 @@ class TransactionRoute extends BaseRoutes {
          [authToken],
          tryCatch(transactionController.updateStatusTransaction),
       );
+
+      this.router.get(
+         '/recent/:user_id',
+         [authToken],
+         tryCatch(transactionController.getRecentTransaction),
+      );
+
+      this.router.post(
+         '/:transaction_id/room/:room_id',
+         [authToken],
+         tryCatch(transactionController.getRecentTransaction),
+      );
    }
 }
 
