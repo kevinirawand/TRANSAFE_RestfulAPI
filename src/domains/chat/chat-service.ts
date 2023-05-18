@@ -7,7 +7,7 @@ import { Server } from 'socket.io';
 
 class ChatService {
    public app: any = express();
-   public httpServer = createServer(this.app);
+   public httpServer = createServer(this.app);   
 
    public runServer = () => {
       const io: any = new Server(this.httpServer, {});
