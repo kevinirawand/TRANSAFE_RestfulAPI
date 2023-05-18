@@ -1,17 +1,16 @@
+import express from 'express';
 import WebSocket from 'ws';
 import ExpressApplication from '../../app';
 import 'dotenv/config';
+import { createServer } from 'http';
 import { Server } from 'socket.io';
-import express from 'express';
 
 class ChatService {
    public app: any = express();
+   public httpServer = createServer(this.app);
 
    public runServer = () => {
-      const server = this.app.listen(1223, () => {
-         console.info('Chat Server Running on port 1223');
-      });
-      const io: any = new Server(server, {});
+      const io: any = new Server(this.httpServer, {});
 
       io.on('connection', (socket: any) => {
          socket.join('anonymous_group');
