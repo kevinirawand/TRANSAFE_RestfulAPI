@@ -2,34 +2,27 @@ import WebSocket from 'ws';
 import ExpressApplication from '../../app';
 import 'dotenv/config';
 import { Server } from 'socket.io';
+import express from 'express';
 
 class ChatService {
-   public app: ExpressApplication;
+   public app: any = express();
 
-   constructor() {
-      this.app = new ExpressApplication(process.env.PORT || 1337);
-   }
-
-   public runChatServer = () => {
-      const server = this.app.start();
+   public runServer = () => {
+      const server = this.app.listen(1223, () => {
+         console.info('Chat Server Running on port 1223');
+      });
       const io: any = new Server(server, {});
 
-      const connectedUser = new Set();
-
       io.on('connection', (socket: any) => {
-         console.info('Connectted Success', socket.id);
-
-         io.emit('connected-user', connectedUser.size);
-         connectedUser.add(socket.id);
-
-         socket.on('disconnect', () => {
-            console.info('Disconnected', socket.id);
-            connectedUser.delete(socket.id);
+         socket.join('anonymous_group');
+         console.info(socket.id);
+         socket.on('sendMsg', (msg: any) => {
+            console.info('msg', msg);
+            io.to('anonymous_group').emit('sendMsgServer', msg);
          });
-
-         socket.on('message', (data: any) => {
-            console.info(data);
-            socket.broadcast.emit('message-receive', data);
+         socket.on('negotiate', (amount: any) => {
+            console.info('nego', amount);
+            io.to('anonymous_group').emit('nego', amount);
          });
       });
    };

@@ -16,6 +16,7 @@ class TransactionController {
          tax: req.body.tax,
          seller_id: req.app.locals.user.userId,
       };
+
       // shipping_fee,
       // weight
 
@@ -105,6 +106,26 @@ class TransactionController {
       res: Response,
    ): Promise<Response> => {
       return res.send('NEGO HERE');
+   };
+
+   public paymentshipTransaction = async (
+      req: Request,
+      res: Response,
+   ): Promise<Response> => {
+      const result = await TransactionService.paymentship({
+         transaction_id: req.params.transaction_id,
+         amount: req.body.amount,
+         user_id: req.app.locals.user.userId,
+         method: req.body.method,
+         type: req.body.type,
+      });
+      return res.status(200).json({
+         code: 'SUCCESS_CREATE_PAYMENTSHIP',
+         status: 'OK',
+         data: {
+            message: 'Paymentship successfuly!',
+         },
+      });
    };
 }
 

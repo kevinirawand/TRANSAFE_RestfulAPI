@@ -175,6 +175,28 @@ class TransactionService {
       // if acc -> update transaction.product.price = amount
       // else nothing to do
    };
+
+   public paymentship = async (data: any) => {
+      try {
+         const result = await db.sequelize.transaction(
+            async (transactionData: any) => {
+               const paymentship = await db.Paymentship.create(data, {
+                  transaction: transactionData,
+               });
+
+               return paymentship;
+            },
+         );
+
+         return result;
+      } catch (error: any) {
+         throw new BaseError(
+            INVALID_DATABASE_PROCESS,
+            statusCodes.BAD_REQUEST.message,
+            error.message.toString(),
+         );
+      }
+   };
 }
 
 export default new TransactionService();

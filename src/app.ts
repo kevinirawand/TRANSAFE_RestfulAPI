@@ -10,7 +10,8 @@ import apicache from 'apicache';
 import UserRoutes from './domains/user/user-routes.js';
 import AuthRoute from './domains/auth/auth-route.js';
 import errorHandler from './middlewares/error-handler-middleware.js';
-import TransactionRoute from './domains/transaction/transaction-route.js';
+import TransactionRoutes from './domains/transaction/transaction-route.js';
+import ChatRoutes from './domains/chat/chat-route.js';
 
 class ExpressApplication {
    private app: Application;
@@ -38,7 +39,7 @@ class ExpressApplication {
       ]);
    }
 
-   private setupMiddlewares(middlewaresArr: any[]): void {
+private setupMiddlewares(middlewaresArr: any[]): void {
       middlewaresArr.forEach((middleware) => {
          this.app.use(middleware);
       });
@@ -47,7 +48,8 @@ class ExpressApplication {
    private setupRoute(): void {
       this.app.use('/api/v1/auth', AuthRoute);
       this.app.use('/api/v1/user', UserRoutes);
-      this.app.use('/api/v1/transaction', TransactionRoute);
+      this.app.use('/api/v1/transaction', TransactionRoutes);
+      this.app.use('/api/v1/chat', ChatRoutes);
    }
 
    private configureAssets() {

@@ -6,6 +6,7 @@ interface TransactionAttributes {
    product_id: number;
    room_id: string;
    tax: number;
+   shipping_fee?: number;
    negotiable?: boolean;
    status?: string;
 }
@@ -23,6 +24,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       public product_id!: number;
       public room_id!: string;
       public tax!: number;
+      public shipping_fee?: number;
       public negotiable?: boolean;
       public status?: string;
       static associate(models: any) {
@@ -64,6 +66,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
          tax: {
             type: DataTypes.DECIMAL,
             allowNull: false,
+         },
+         shipping_fee: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
          },
          negotiable: {
             type: DataTypes.BOOLEAN,

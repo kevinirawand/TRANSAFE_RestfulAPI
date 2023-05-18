@@ -42,6 +42,12 @@ class TransactionRoute extends BaseRoutes {
          [authToken],
          tryCatch(transactionController.negoTransaction),
       );
+
+      this.router.post(
+         '/:transaction_id/paymentship',
+         [authToken],
+         tryCatch(transactionController.paymentshipTransaction),
+      );
    }
 }
 

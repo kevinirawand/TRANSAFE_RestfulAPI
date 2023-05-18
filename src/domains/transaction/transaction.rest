@@ -39,5 +39,16 @@ POST http://localhost:1337/api/v1/transaction/join/35274a85-0c47-48bc-8556-51214
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
+### PAYMENTSHIP TRANSACTION
+POST http://localhost:1337/api/v1/transaction/1/paymentship
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
+
+{
+   "amount": 2500000,
+   "method": "gopay",
+   "user_id": 1,
+   "type": "in"
+}
 
 
