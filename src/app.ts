@@ -13,6 +13,7 @@ import errorHandler from './middlewares/error-handler-middleware.js';
 import TransactionRoutes from './domains/transaction/transaction-route.js';
 import ChatRoutes from './domains/chat/chat-route.js';
 import PaymentshipRoutes from './domains/transaction/paymentship/paymentship-route.js';
+import NegoRoutes from './domains/transaction/nego/nego-route.js';
 
 class ExpressApplication {
    private app: Application;
@@ -51,6 +52,7 @@ class ExpressApplication {
       this.app.use('/api/v1/user', UserRoutes);
       this.app.use('/api/v1/transaction', TransactionRoutes);
       this.app.use('/api/v1/transaction', PaymentshipRoutes);
+      this.app.use('/api/v1/transaction', NegoRoutes);
       this.app.use('/api/v1/chat', ChatRoutes);
    }
 

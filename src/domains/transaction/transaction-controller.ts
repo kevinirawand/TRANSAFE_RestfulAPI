@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import TransactionService from './transaction-service';
+import BaseError from '../../errors/error-mockup';
 
 class TransactionController {
    public createTransaction = async (
@@ -87,7 +88,7 @@ class TransactionController {
       req: Request,
       res: Response,
    ): Promise<Response> => {
-      const result = await TransactionService.join(
+      await TransactionService.join(
          req.params.room_id || '',
          req.app.locals.user.userId,
       );
@@ -99,13 +100,6 @@ class TransactionController {
             message: 'Success join transaction!',
          },
       });
-   };
-
-   public negoTransaction = async (
-      req: Request,
-      res: Response,
-   ): Promise<Response> => {
-      return res.send('NEGO HERE');
    };
 
    public paymentshipTransaction = async (

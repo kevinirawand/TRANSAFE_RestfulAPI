@@ -1,7 +1,7 @@
 import validateCredentials from '../../middlewares/validate-credentials-middleware';
 import BaseRoutes from '../../base_claseses/base-routes';
 import tryCatch from '../../utils/tryCatcher';
-import transactionController from './transaction-controller';
+import TransactionController from './transaction-controller';
 import { createTransactionSchema } from './transaction-schema';
 import authToken from '../../middlewares/auth-token-middleware';
 
@@ -10,44 +10,34 @@ class TransactionRoute extends BaseRoutes {
       this.router.post(
          '/',
          [authToken, validateCredentials(createTransactionSchema)],
-         tryCatch(transactionController.createTransaction),
+         tryCatch(TransactionController.createTransaction),
       );
 
       this.router.get(
          '/:transaction_id',
          [authToken],
-         tryCatch(transactionController.getOneTransaction),
+         tryCatch(TransactionController.getOneTransaction),
       );
 
       this.router.put(
          '/:transaction_id',
          [authToken],
-         tryCatch(transactionController.updateStatusTransaction),
+         tryCatch(TransactionController.updateStatusTransaction),
       );
 
       this.router.get(
          '/recent/:user_id',
          [authToken],
-         tryCatch(transactionController.getRecentTransaction),
+         tryCatch(TransactionController.getRecentTransaction),
       );
 
       this.router.post(
          '/join/:room_id',
          [authToken],
-         tryCatch(transactionController.joinTransaction),
+         tryCatch(TransactionController.joinTransaction),
       );
 
-      this.router.post(
-         '/:transaction_id/nego/:amount',
-         [authToken],
-         tryCatch(transactionController.negoTransaction),
-      );
-
-      // this.router.post(
-      //    '/:transaction_id/paymentship',
-      //    [authToken],
-      //    tryCatch(transactionController.paymentshipTransaction),
-      // );
+      
    }
 }
 
