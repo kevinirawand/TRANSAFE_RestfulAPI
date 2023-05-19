@@ -1,3 +1,6 @@
+import { NULL_DATA } from '../../errors/error-codes';
+import BaseError from '../../errors/error-mockup';
+import statusCodes from '../../errors/status-codes';
 import db from '../../models';
 
 class UserService {
@@ -6,7 +9,16 @@ class UserService {
          where: {
             id: user_id,
          },
+         attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
       });
+
+      if (user === null) {
+         throw new BaseError(
+            NULL_DATA,
+            statusCodes.NOT_FOUND.message,
+            'User Not Found',
+         );
+      }
 
       return user;
    };
