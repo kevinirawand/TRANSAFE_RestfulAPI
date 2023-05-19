@@ -51,4 +51,14 @@ X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1l
    "type": "in"
 }
 
+###
+POST http://localhost:1337/api/v1/transaction/1/transaction_process
+Content-Type: application/json
+X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
+
+###
+GET https://api.sandbox.midtrans.com/v2/20/status
+Accept: application/json
+Content-Type: application/json
+Authorization: Basic SB-Mid-server-U3iTv_jdlhLtdHEjGjH28LEr

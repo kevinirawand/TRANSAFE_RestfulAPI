@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import TransactionService from './transaction-service';
 import BaseError from '../../errors/error-mockup';
+import UserService from '../user/user-service';
 
 class TransactionController {
    public createTransaction = async (
@@ -121,6 +122,29 @@ class TransactionController {
          },
       });
    };
+
+   public processTransaction = async (
+      req: Request,
+      res: Response,
+   ): Promise<Response> => {
+      const transaction = await TransactionService.findById(
+         parseInt(req.params.transaction_id || ''),
+      );
+
+      const buyerDetail = await UserService.findById(transaction.room.buyer_id);
+
+      return res.status(200).json({
+         code: 'TRANSACTION_PROCESSED',
+         status: 'OK',
+         data: {
+            buyerDetail,
+         },
+      });
+   };
+
+   public transactionConfirmation = async (req: Request, res: Response): Promise<Response> => {
+      
+   }
 }
 
 export default new TransactionController();

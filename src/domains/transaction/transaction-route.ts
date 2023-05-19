@@ -37,7 +37,11 @@ class TransactionRoute extends BaseRoutes {
          tryCatch(TransactionController.joinTransaction),
       );
 
-      
+      this.router.post(
+         '/:transaction_id/transaction_process',
+         [authToken],
+         tryCatch(TransactionController.processTransaction),
+      );
    }
 }
 
