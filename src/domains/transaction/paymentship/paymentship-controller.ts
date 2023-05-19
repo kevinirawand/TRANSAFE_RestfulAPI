@@ -48,7 +48,7 @@ class PaymentshipController {
       const user = await UserService.findById(req.app.locals.user.userId);
 
       const payloads = {
-         order_id: 20,
+         order_id: transaction.id,
          gross_amount:
             parseInt(transaction.product.price) +
             parseInt(transaction.tax) +

@@ -197,6 +197,10 @@ class TransactionService {
          );
       }
    };
+
+   public confirmation = async (data: any): Promise<void> => {
+      await db.Evidence.create(data);
+   };
 }
 
 export default new TransactionService();

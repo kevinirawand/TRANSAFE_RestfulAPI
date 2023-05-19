@@ -7,8 +7,7 @@ Content-Type: application/json
    "username": "ko joko",
    "phone_number": "6285159436455",
    "email": "ojoko@gmail.com",
-   "password": "12345",
-   "passwordConfirmation": "12345"
+   "password": "12345"
 }
 
 ###

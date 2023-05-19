@@ -1,25 +1,3 @@
-###
-POST https://app.sandbox.midtrans.com/snap/v1/transactions
-Accept: application/json
-Authorization: Basic SB-Mid-server-U3iTv_jdlhLtdHEjGjH28LEr
-Content-Type: application/json
-
-{
-   "transaction_details": {
-      "order_id": "1",
-      "gross_amount": 2500000
-   },
-   "credit_card":{
-        "secure" : true
-    },
-   "customer_details": {
-      "first_name": "Kevin",
-      "last_name": "ID",
-      "email": "kevinid@example.com",
-      "phone_number": "08111222333"
-   }
-}
-
 ### 
 POST http://localhost:1337/api/v1/transaction/1/paymentship
 Accept: application/json

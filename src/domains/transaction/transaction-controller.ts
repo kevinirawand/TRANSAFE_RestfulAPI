@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import TransactionService from './transaction-service';
 import BaseError from '../../errors/error-mockup';
 import UserService from '../user/user-service';
+import { INVALID_CREDENTIALS } from '../../errors/error-codes';
+import statusCodes from '../../errors/status-codes';
 
 class TransactionController {
    public createTransaction = async (
@@ -142,9 +144,39 @@ class TransactionController {
       });
    };
 
-   public transactionConfirmation = async (req: Request, res: Response): Promise<Response> => {
-      
-   }
+   public transactionConfirmation = async (
+      req: Request,
+      res: Response,
+   ): Promise<Response> => {
+      const obj = JSON.parse(JSON.stringify({ ...req.files }));
+
+      if (!obj.evidence_pict) {
+         return res.status(400).json({
+            code: INVALID_CREDENTIALS,
+            status: statusCodes.BAD_REQUEST.message,
+            errors: {
+               evidence_pict: ['evidence_pict is required'],
+            },
+         });
+      }
+
+      const data = {
+         shipping_name: req.body.shipping_name,
+         resi: req.body.resi,
+         desc: req.body.desc,
+         evidence_pict: obj.evidence_pict[0].path.toString(),
+      };
+
+      await TransactionService.confirmation(data);
+
+      return res.status(200).json({
+         code: 'TRANSACTION_PROCESSED',
+         status: 'OK',
+         data: {
+            message: 'Transaction Confirmed!',
+         },
+      });
+   };
 }
 
 export default new TransactionController();

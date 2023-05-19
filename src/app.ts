@@ -14,16 +14,50 @@ import TransactionRoutes from './domains/transaction/transaction-route.js';
 import ChatRoutes from './domains/chat/chat-route.js';
 import PaymentshipRoutes from './domains/transaction/paymentship/paymentship-route.js';
 import NegoRoutes from './domains/transaction/nego/nego-route.js';
+import multer from 'multer';
 
 class ExpressApplication {
    private app: Application;
+   private fileStorage: any = multer.diskStorage({
+      destination: (req, file, cb) => {
+         cb(null, 'public/images');
+      },
+      filename: (req, file, cb) => {
+         cb(null, new Date().getTime() + '-' + file.originalname);
+      },
+   });
+   private fileFilter: any = (req: any, file: any, cb: any) => {
+      if (
+         file.mimetype === 'image/png' ||
+         file.mimetype === 'image/jpg' ||
+         file.mimetype === 'image/jpeg'
+      ) {
+         cb(null, true);
+      } else {
+         cb(null, false);
+      }
+   };
 
    constructor(private port: string | number) {
       this.app = express();
       this.port = port;
       this.app.use(express.json({ type: 'application/json' }));
       this.app.use(express.urlencoded({ extended: false }));
-
+      this.app.use(
+         multer({
+            storage: this.fileStorage,
+            fileFilter: this.fileFilter,
+         }).fields([
+            {
+               name: 'images',
+               maxCount: 1,
+            },
+            {
+               name: 'evidence_pict',
+               maxCount: 1,
+            },
+         ]),
+      );
       //  __init__
       this.configureAssets();
       this.setupRoute();

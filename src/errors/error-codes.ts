@@ -8,3 +8,4 @@ export const INVALID_DATABASE_PROCESS: string = 'DATABASE_ROLLBACK_PROCESS';
 export const FIALED_DATABASE_PROCESS: string = 'FAILED_DATABASE_PROCESS';
 export const INVALID_IDENTITY: string = 'INVALID_IDENTITY';
 export const MIDTRANS_ERROR: string = 'PAYMENTSHIP_FAILED';
+export const NULL_DATA: string = 'NULL_DATA';
