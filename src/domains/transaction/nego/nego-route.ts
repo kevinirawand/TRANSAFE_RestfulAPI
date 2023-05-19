@@ -6,9 +6,9 @@ import NegoController from './nego-controller';
 class NegoRoutes extends BaseRoutes {
    public routes(): void {
       this.router.post(
-         '/:transaction_id/nego/:amount',
+         '/:transaction_id/nego/:amount/:status',
          [authToken],
-         tryCatch(NegoController.negoTransaction),
+         tryCatch(NegoController.negoHandler),
       );
    }
 }
