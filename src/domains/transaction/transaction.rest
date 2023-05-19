@@ -1,7 +1,7 @@
 ### CREATE TRANSACTION
 POST http://localhost:1337/api/v1/transaction
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
+X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
 {
    "category": "fisik",
@@ -18,12 +18,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZ
 ### GET ONE TRANSACTION
 GET http://localhost:1337/api/v1/transaction/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
+X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
 ### UPDATE STATUS TRANSACTION
 PUT http://localhost:1337/api/v1/transaction/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
+X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
 {
    "status": "JOIN"
@@ -32,17 +32,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZ
 ### GET RECENT TRANSACTION
 GET http://localhost:1337/api/v1/transaction/recent/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
+X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
 ### JOIN TRANSACTION
 POST http://localhost:1337/api/v1/transaction/join/35274a85-0c47-48bc-8556-512149475b9e
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
+X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
 ### PAYMENTSHIP TRANSACTION
 POST http://localhost:1337/api/v1/transaction/1/paymentship
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
+X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
 {
    "amount": 2500000,

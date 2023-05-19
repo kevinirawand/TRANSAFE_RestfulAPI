@@ -22,14 +22,7 @@ Content-Type: application/json
 
 ### 
 POST http://localhost:1337/api/v1/transaction/1/paymentship
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQ0MzEyMDMsImV4cCI6MTY4NDQ4NTIwM30._vbS1MqkXEkuZejU-_ze36ljGzWCbuuH_-Rt-UxIE44
-Content-Type: application/json
 Accept: application/json
-
-{
-   "transaction_id": 3,
-   "amount": 2500000,
-   "username": "KevinID",
-   "email": "kevin@test.com",
-   "phone_number": "08512598321"
-}
+X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQ1MDEyODYsImV4cCI6MTY4NDU1NTI4Nn0.4hGH8HA9NQBe0PJZcM5CNiDZDRchjSE3_G1GWZYkZW0
+Authorization: Basic SB-Mid-server-U3iTv_jdlhLtdHEjGjH28LEr
+Content-Type: application/json

@@ -1,15 +1,32 @@
 import { Request, Response } from 'express';
-import paymentshipService from './paymentship-service';
+import PaymentshipService from './paymentship-service';
+import TransactionService from '../transaction-service';
+import UserService from '../../user/user-service';
 
 class PaymentshipController {
-   public createSnapTransaction = async (
+   public paymentshipHandling = async (
       req: Request,
       res: Response,
    ): Promise<Response> => {
-      const transaction = await paymentshipService.createSnap(req.body);
-
+      let transaction: any;
+      if (req.body.payment_type === 'gopay') {
+         transaction = await PaymentshipService.eMoney(req.body);
+      }
       return res.status(200).json({
-         code: 'PAYMENTSHIP_SUCCESS',
+         code: 'CREATED_EMONEY_TRANSACTION',
+         status: 'OK',
+         data: {
+            transaction,
+         },
+      });
+   };
+   public eMoneyPaymentship = async (
+      req: Request,
+      res: Response,
+   ): Promise<Response> => {
+      const transaction = await PaymentshipService.eMoney(req.body);
+      return res.status(200).json({
+         code: 'CREATED_EMONEY_TRANSACTION',
          status: 'OK',
          data: {
             transaction,
@@ -17,8 +34,51 @@ class PaymentshipController {
       });
    };
 
+   public createSnapTransaction = async (
+      req: Request,
+      res: Response,
+   ): Promise<Response> => {
+      const transaction = await TransactionService.findById(
+         parseInt(req.params.transaction_id || '-1'),
+      );
+
+      // console.info(transaction);
+      // return res.send(transaction);
+
+      const user = await UserService.findById(req.app.locals.user.userId);
+
+      const payloads = {
+         order_id: 20,
+         gross_amount:
+            parseInt(transaction.product.price) +
+            parseInt(transaction.tax) +
+            transaction.shipping_fee,
+         username: user.username,
+         email: user.email,
+         phone: user.phone_number,
+      };
+
+      const snap = await PaymentshipService.createSnap(payloads);
+
+      return res.status(200).json({
+         code: 'PAYMENTSHIP_SUCCESS',
+         status: 'OK',
+         data: {
+            ...snap,
+         },
+      });
+   };
+
    public webhooksPaymentship = (req: Request, res: Response): Response => {
-      return res.send(req.body);
+      console.info(req.body);
+
+      return res.status(200).json({
+         code: 'RECIVE_FROM_MIDTRANS_WEBHOOK_API',
+         status: 'OK',
+         data: {
+            ...req.body,
+         },
+      });
    };
 }
 
