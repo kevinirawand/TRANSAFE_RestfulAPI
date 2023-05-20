@@ -32,9 +32,8 @@ class PaymentshipService {
       const transaction = await snap.createTransaction(parameter);
 
       if (transaction) {
-         
       }
-      
+
       return transaction;
       try {
       } catch (err: any) {

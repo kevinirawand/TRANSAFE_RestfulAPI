@@ -22,14 +22,16 @@ class TransactionController {
          });
       }
 
+      // const newResJSON.parse(JSON.stringify(req.body));
+
       const data = {
          category: req.body.category,
          name: req.body.name,
          desc: req.body.desc,
-         price: 5000000,
-         negotiable: false,
+         price: parseInt(req.body.price),
+         negotiable: req.body.negotiable,
          images: obj.images[0].path.toString(),
-         tax: 10000,
+         tax: req.body.tax,
          seller_id: req.app.locals.user.userId,
       };
 

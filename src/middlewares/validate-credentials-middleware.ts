@@ -10,7 +10,7 @@ const validateCredentials =
                label: '',
             },
          },
-         convert: false,
+         convert: true,
       });
 
       if (validated.error) {

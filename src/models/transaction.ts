@@ -64,7 +64,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
             },
          },
          tax: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.INTEGER,
             allowNull: false,
          },
          shipping_fee: {
