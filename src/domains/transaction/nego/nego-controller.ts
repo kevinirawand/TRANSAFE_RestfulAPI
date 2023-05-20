@@ -12,8 +12,6 @@ class NegoController {
             parseInt(req.params.transaction_id || ''),
          );
 
-         // return res.send(transaction);
-
          await db.Product.update(
             {
                price: parseInt(req.params.amount || ''),

@@ -44,9 +44,9 @@ class TransactionRoute extends BaseRoutes {
       );
 
       this.router.post(
-         '/:transaction_id/transaction_confirm',
-         [],
-         tryCatch(TransactionController.transactionConfirmation),
+         '/:transaction_id/send_order',
+         [authToken],
+         tryCatch(TransactionController.sendOrderTransaction),
       );
    }
 }

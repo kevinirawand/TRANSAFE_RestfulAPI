@@ -198,8 +198,21 @@ class TransactionService {
       }
    };
 
-   public confirmation = async (data: any): Promise<void> => {
-      await db.Evidence.create(data);
+   public sendOrder = async (data: any): Promise<any> => {
+      console.info(`THIS TF ID : ${data.transaction_id}`);
+      await db.Evidence.create({
+         ...data,
+         transaction_id: data.transaction_id,
+      });
+
+      const transaction = await db.Transaction.findOne({
+         where: {
+            id: data.transaction_id,
+         },
+         include: [{ model: db.Evidence, as: 'evidence' }],
+      });
+
+      return transaction;
    };
 }
 

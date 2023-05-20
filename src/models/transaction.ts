@@ -37,6 +37,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
             as: 'product',
             foreignKey: 'product_id',
          });
+         Transaction.hasMany(models.Evidence, {
+            as: 'evidence',
+         });
       }
    }
    Transaction.init(

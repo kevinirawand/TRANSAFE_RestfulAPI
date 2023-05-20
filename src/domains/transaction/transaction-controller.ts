@@ -158,36 +158,47 @@ class TransactionController {
       });
    };
 
-   public transactionConfirmation = async (
+   public sendOrderTransaction = async (
       req: Request,
       res: Response,
    ): Promise<Response> => {
       const obj = JSON.parse(JSON.stringify({ ...req.files }));
 
-      if (!obj.evidence_pict) {
-         return res.status(400).json({
-            code: INVALID_CREDENTIALS,
-            status: statusCodes.BAD_REQUEST.message,
-            errors: {
-               evidence_pict: ['evidence_pict is required'],
-            },
-         });
-      }
+      /**COMMENT THIS TO TEST VIA REST CLIENT */
+      // if (!obj.evidence_pict) {
+      //    return res.status(400).json({
+      //       code: INVALID_CREDENTIALS,
+      //       status: statusCodes.BAD_REQUEST.message,
+      //       errors: {
+      //          evidence_pict: ['evidence_pict is required'],
+      //       },
+      //    });
+      // }
 
+      /**COMMENT THIS TO TEST VIA REST CLIENT */
+      // const data = {
+      //    shipping_name: req.body.shipping_name,
+      //    resi: req.body.resi,
+      //    desc: req.body.desc,
+      //    evidence_pict: obj.evidence_pict[0].path.toString(),
+      // };
+
+      /**ACTIVED THIS COMMENT AND COMMENT DATA ABOVE TO TEST VIA REST CLIENT */
       const data = {
          shipping_name: req.body.shipping_name,
          resi: req.body.resi,
          desc: req.body.desc,
-         evidence_pict: obj.evidence_pict[0].path.toString(),
+         evidence_pict: req.body.evidence_pict,
+         transaction_id: req.params.transaction_id,
       };
 
-      await TransactionService.confirmation(data);
+      const transactionWithEvidence = await TransactionService.sendOrder(data);
 
       return res.status(200).json({
          code: 'TRANSACTION_PROCESSED',
          status: 'OK',
          data: {
-            message: 'Transaction Confirmed!',
+            transactionWithEvidence,
          },
       });
    };

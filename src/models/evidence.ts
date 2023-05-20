@@ -2,10 +2,12 @@
 import { Model } from 'sequelize';
 
 interface EvidenceAttributes {
+   transaction_id: number;
    shipping_name: string;
    resi: string;
    desc: string;
    evidence_pict: string;
+   isReturn?: boolean;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -18,16 +20,27 @@ module.exports = (sequelize: any, DataTypes: any) => {
        * This method is not a part of Sequelize lifecycle.
        * The `models/index` file will call this method automatically.
        */
+      public transaction_id!: number;
       public shipping_name!: string;
       public resi!: string;
       public desc!: string;
       public evidence_pict!: string;
+      public isReturn?: boolean;
       static associate(models: any) {
          // define association here
+         Evidence.hasOne(models.Transaction);
       }
    }
    Evidence.init(
       {
+         transaction_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+               model: 'Transaction',
+               key: 'id',
+            },
+         },
          shipping_name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -43,6 +56,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
          evidence_pict: {
             type: DataTypes.STRING,
             allowNull: false,
+         },
+         isReturn: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
          },
       },
       {

@@ -1,6 +1,18 @@
 ### 
-POST http://localhost:1337/api/v1/transaction/1/paymentship
+POST http://localhost:1337/api/v1/transaction/22/paymentship
 Accept: application/json
-X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQ1MDEyODYsImV4cCI6MTY4NDU1NTI4Nn0.4hGH8HA9NQBe0PJZcM5CNiDZDRchjSE3_G1GWZYkZW0
+X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQ1ODkxNjcsImV4cCI6MTY4NDY0MzE2N30.Aw3I4KD4qITx_5AZV8G2NUBPS1RAPwmHMFPH46JzEJU
 Authorization: Basic SB-Mid-server-U3iTv_jdlhLtdHEjGjH28LEr
 Content-Type: application/json
+
+
+###
+POST https://app.sandbox.midtrans.com/iris/api/v1/beneficiaries
+Accept: application/json
+X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQ1ODkxNjcsImV4cCI6MTY4NDY0MzE2N30.Aw3I4KD4qITx_5AZV8G2NUBPS1RAPwmHMFPH46JzEJU
+Authorization: Basic SB-Mid-server-U3iTv_jdlhLtdHEjGjH28LEr
+Content-Type: application/json
+
+{
+  
+}
