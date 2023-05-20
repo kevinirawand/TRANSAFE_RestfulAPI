@@ -14,8 +14,5 @@ export const createTransactionSchema = Joi.object({
    negotiable: Joi.boolean(),
    shipping_fee: Joi.number().integer(),
    weight: Joi.number().integer(),
-   images: Joi.string()
-      .pattern(/\.(png|jpe?g)$/i)
-      .required(),
    tax: Joi.number().required(),
 });

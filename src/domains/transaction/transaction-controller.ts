@@ -10,14 +10,26 @@ class TransactionController {
       req: Request,
       res: Response,
    ): Promise<Response> => {
+      const obj = JSON.parse(JSON.stringify({ ...req.files }));
+
+      if (!obj.images) {
+         return res.status(400).json({
+            code: INVALID_CREDENTIALS,
+            status: statusCodes.BAD_REQUEST.message,
+            errors: {
+               images: ['product image is required'],
+            },
+         });
+      }
+
       const data = {
          category: req.body.category,
          name: req.body.name,
          desc: req.body.desc,
-         price: req.body.price,
-         negotiable: req.body.negotiable,
-         images: req.body.images,
-         tax: req.body.tax,
+         price: 5000000,
+         negotiable: false,
+         images: obj.images[0].path.toString(),
+         tax: 10000,
          seller_id: req.app.locals.user.userId,
       };
 
