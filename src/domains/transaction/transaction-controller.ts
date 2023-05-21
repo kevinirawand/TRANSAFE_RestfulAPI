@@ -122,16 +122,34 @@ class TransactionController {
    ): Promise<Response> => {
       console.info(req.app.locals.user);
 
-      await TransactionService.join(
+      const data = await TransactionService.join(
          req.params.room_id || '',
          req.app.locals.user.userId,
+      );
+
+      return res.status(200).json({
+         code: 'SUCCESS_GET_ROOM',
+         status: 'OK',
+         data: {
+            data,
+         },
+      });
+   };
+
+   public joinConfirmation = async (
+      req: Request,
+      res: Response,
+   ): Promise<Response> => {
+      await TransactionService.confirmJoin(
+         req.app.locals.user.userId,
+         req.params.room_id || '',
       );
 
       return res.status(200).json({
          code: 'SUCCESS_JOIN_TRANSACTION',
          status: 'OK',
          data: {
-            message: 'Success join transaction!',
+            message: 'Buyer join this room!',
          },
       });
    };
@@ -161,13 +179,13 @@ class TransactionController {
       res: Response,
    ): Promise<Response> => {
       const transaction = await TransactionService.findById(
-         parseInt(req.params.transaction_id || ''),
+         req.params.transaction_id || '',
       );
 
       const buyerDetail = await UserService.findById(transaction.room.buyer_id);
 
       TransactionService.updateStatus(
-         parseInt(req.params.transaction_id || ''),
+         req.params.transaction_id || '',
          'DIPROSES',
       );
 

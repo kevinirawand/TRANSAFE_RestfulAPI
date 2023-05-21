@@ -148,9 +148,36 @@ class TransactionService {
          );
       }
 
-      const transaction = await this.findById(room.id);
+      const transaction = await this.findById(room.transaction_id);
 
       return transaction;
+   };
+
+   public confirmJoin = async (user_id: number, room_id: string) => {
+      const room = await db.Room.findOne({
+         where: {
+            id: room_id,
+         },
+      });
+
+      db.Room.update(
+         {
+            buyer_id: user_id,
+         },
+         {
+            where: {
+               id: room_id,
+            },
+         },
+      ).catch((err: any) => {
+         throw new BaseError(
+            FIALED_DATABASE_PROCESS,
+            statusCodes.BAD_REQUEST.message,
+            err.message.toString(),
+         );
+      });
+
+      await this.updateStatus(room.transaction_id, 'JOIN');
    };
 
    public nego = async (
