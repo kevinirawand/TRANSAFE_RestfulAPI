@@ -15,13 +15,19 @@ X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1l
    "tax": 10000
 }
 
+
+
+
 ### GET ONE TRANSACTION
-GET http://localhost:1337/api/v1/transaction/1
+GET http://localhost:1337/api/v1/transaction/23
 Content-Type: application/json
 X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
+
+
+
 ### UPDATE STATUS TRANSACTION
-PUT http://localhost:1337/api/v1/transaction/1
+PUT http://localhost:1337/api/v1/transaction/23
 Content-Type: application/json
 X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
@@ -30,17 +36,17 @@ X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1l
 }
 
 ### GET RECENT TRANSACTION
-GET http://localhost:1337/api/v1/transaction/recent/1
+GET http://localhost:1337/api/v1/transaction/recent/23
 Content-Type: application/json
 X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
 ### JOIN TRANSACTION
-POST http://localhost:1337/api/v1/transaction/join/35274a85-0c47-48bc-8556-512149475b9e
+POST http://localhost:1337/api/v1/transaction/join/f5b53a07-33c7-4a0b-9613-05c856fcf246
 Content-Type: application/json
 X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 
 ###
-POST http://localhost:1337/api/v1/transaction/2/transaction_process
+POST http://localhost:1337/api/v1/transaction/1/transaction_process
 Content-Type: application/json
 X-Auth: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI
 

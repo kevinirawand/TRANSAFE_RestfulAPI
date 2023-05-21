@@ -12,6 +12,9 @@ class TransactionController {
    ): Promise<Response> => {
       const obj = JSON.parse(JSON.stringify({ ...req.files }));
 
+      /**
+       * COMMENT THIS TO TEST WITH REST CLIENT
+       */
       if (!obj.images) {
          return res.status(400).json({
             code: INVALID_CREDENTIALS,
@@ -22,8 +25,9 @@ class TransactionController {
          });
       }
 
-      // const newResJSON.parse(JSON.stringify(req.body));
-
+      /**
+       * COMMENT THIS TO TEST WITH REST CLIENT
+       */
       const data = {
          category: req.body.category,
          name: req.body.name,
@@ -35,8 +39,19 @@ class TransactionController {
          seller_id: req.app.locals.user.userId,
       };
 
-      // shipping_fee,
-      // weight
+      /**
+       * USE THIS TO TEST WITH REST CLIENT
+       */
+      // const data = {
+      //    category: req.body.category,
+      //    name: req.body.name,
+      //    desc: req.body.desc,
+      //    price: parseInt(req.body.price),
+      //    negotiable: req.body.negotiable,
+      //    images: req.body.images,
+      //    tax: req.body.tax,
+      //    seller_id: req.app.locals.user.userId,
+      // };
 
       const transaction = await TransactionService.createTransaction(data);
 
@@ -54,7 +69,7 @@ class TransactionController {
       res: Response,
    ): Promise<Response> => {
       const result = await TransactionService.findById(
-         parseInt(req.params.transaction_id || '-1'),
+         req.params.transaction_id || '',
       );
 
       return res.status(200).json({
@@ -71,7 +86,7 @@ class TransactionController {
       res: Response,
    ): Promise<Response> => {
       await TransactionService.updateStatus(
-         parseInt(req.params.transaction_id || '-1'),
+         req.params.transaction_id || '',
          req.body.status,
       );
 
@@ -105,6 +120,8 @@ class TransactionController {
       req: Request,
       res: Response,
    ): Promise<Response> => {
+      console.info(req.app.locals.user);
+
       await TransactionService.join(
          req.params.room_id || '',
          req.app.locals.user.userId,
@@ -149,10 +166,16 @@ class TransactionController {
 
       const buyerDetail = await UserService.findById(transaction.room.buyer_id);
 
+      TransactionService.updateStatus(
+         parseInt(req.params.transaction_id || ''),
+         'DIPROSES',
+      );
+
       return res.status(200).json({
          code: 'TRANSACTION_PROCESSED',
          status: 'OK',
          data: {
+            transaction,
             buyerDetail,
          },
       });

@@ -60,6 +60,11 @@ class PaymentshipController {
 
       const snap = await PaymentshipService.createSnap(payloads);
 
+      await TransactionService.updateStatus(
+         parseInt(req.params.transaction_id || '-1'),
+         'DIBAYAR',
+      );
+
       return res.status(200).json({
          code: 'PAYMENTSHIP_SUCCESS',
          status: 'OK',

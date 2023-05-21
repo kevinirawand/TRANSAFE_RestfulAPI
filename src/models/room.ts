@@ -1,10 +1,11 @@
-'use strict';
+('use strict');
 import { Model } from 'sequelize';
 
 interface RoomAttributes {
    id: string;
    seller_id: number;
    buyer_id: number;
+   transaction_id: string;
 }
 module.exports = (sequelize: any, DataTypes: any) => {
    class Room extends Model<RoomAttributes> implements RoomAttributes {
@@ -16,6 +17,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       public id!: string;
       public seller_id!: number;
       public buyer_id!: number;
+      public transaction_id!: string;
       static associate(models: any) {
          // define association here
          Room.hasOne(models.Transaction);
@@ -36,6 +38,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
          buyer_id: {
             type: DataTypes.INTEGER,
             allowNull: true,
+         },
+         transaction_id: {
+            type: DataTypes.UUID,
+            allowNull: false,
+            references: {
+               model: 'Transactions',
+               key: 'id',
+            },
          },
       },
       {

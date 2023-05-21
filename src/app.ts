@@ -82,6 +82,7 @@ class ExpressApplication {
    }
 
    private setupRoute(): void {
+      this.app.use('/api/v1/user', UserRoutes);
       this.app.use('/api/v1/auth', AuthRoute);
       this.app.use('/api/v1/user', UserRoutes);
       this.app.use('/api/v1/transaction', TransactionRoutes);

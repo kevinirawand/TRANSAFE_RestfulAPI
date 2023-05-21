@@ -1,53 +1,68 @@
 import { Request, Response } from 'express';
 import IController from '../../interfaces/controller-interface';
+import UserService from './user-service';
 
-let data: Array<any> = [
-   {
-      id: 1,
-      name: 'Kevin',
-      age: 19,
-   },
-   {
-      id: 2,
-      name: 'Iksan',
-      age: 18,
-   },
-   {
-      id: 3,
-      name: 'Ahmed',
-      age: 20,
-   },
-];
+class UserController implements IController {
+   async index(req: Request, res: Response): Promise<Response> {
+      const users = await UserService.getAll();
 
-class TestController implements IController {
-   index(req: Request, res: Response): Response {
-      return res.json(req.app.locals.user);
+      return res.status(200).json({
+         code: 'SUCCESS_GET_ALL_USERS',
+         status: 'OK',
+         data: {
+            users,
+         },
+      });
    }
 
-   create(req: Request, res: Response): Response {
-      console.info(req.body);
-      data.push(req.body);
+   async create(req: Request, res: Response): Promise<Response> {
+      await UserService.create(req.body);
 
-      return res.json(data);
+      return res.status(200).json({
+         code: 'SUCCESS_CREATE_USER',
+         status: 'OK',
+         data: {
+            message: 'User created!',
+         },
+      });
    }
 
-   show(req: Request, res: Response): Response {
-      return res.json(data.filter((d) => d.id == req.params.id));
+   async show(req: Request, res: Response): Promise<Response> {
+      const user = await UserService.findById(
+         parseInt(req.params.user_id || ''),
+      );
+
+      return res.status(200).json({
+         code: 'SUCCESS_GET_USER',
+         status: 'OK',
+         data: {
+            user,
+         },
+      });
    }
 
-   update(req: Request, res: Response): Response {
-      let user = data.find((d) => d.id == req.params.id);
+   async update(req: Request, res: Response): Promise<Response> {
+      await UserService.update(parseInt(req.params.user_id || ''), req.body);
 
-      user.name = req.body.name;
-
-      return res.json(data);
+      return res.status(200).json({
+         code: 'SUCCESS_UPDATE_USER',
+         status: 'OK',
+         data: {
+            message: 'User Updated',
+         },
+      });
    }
 
-   delete(req: Request, res: Response): Response {
-      // delete data[parseInt(req.params.id) - 1];
-
-      return res.json(data);
+   async delete(req: Request, res: Response): Promise<Response> {
+      await UserService.delete(parseInt(req.params.user_id || ''));
+      return res.status(200).json({
+         code: 'SUCCESS_DELETE_USER',
+         status: 'OK',
+         data: {
+            message: 'User Deleted',
+         },
+      });
    }
 }
 
-export default new TestController();
+export default new UserController();

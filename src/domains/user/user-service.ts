@@ -4,6 +4,16 @@ import statusCodes from '../../errors/status-codes';
 import db from '../../models';
 
 class UserService {
+   public getAll = async (): Promise<any> => {
+      const users = await db.User.findAll();
+
+      return users;
+   };
+
+   public create = async (data: any): Promise<void> => {
+      await db.User.create(data);
+   };
+
    public findById = async (user_id: number): Promise<any> => {
       const user = await db.User.findOne({
          where: {
@@ -21,6 +31,22 @@ class UserService {
       }
 
       return user;
+   };
+
+   public update = async (user_id: number, data: any): Promise<any> => {
+      await db.User.update(data, {
+         where: {
+            id: user_id,
+         },
+      });
+   };
+
+   public delete = async (user_id: number): Promise<any> => {
+      await db.User.destroy({
+         where: {
+            id: user_id,
+         },
+      });
    };
 }
 

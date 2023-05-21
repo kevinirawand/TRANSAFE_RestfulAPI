@@ -2,9 +2,8 @@
 import { Model } from 'sequelize';
 
 interface TransactionAttributes {
-   id: number;
+   id: string;
    product_id: number;
-   room_id: string;
    tax: number;
    shipping_fee?: number;
    negotiable?: boolean;
@@ -20,18 +19,16 @@ module.exports = (sequelize: any, DataTypes: any) => {
        * This method is not a part of Sequelize lifecycle.
        * The `models/index` file will call this method automatically.
        */
-      public id!: number;
+      public id!: string;
       public product_id!: number;
-      public room_id!: string;
       public tax!: number;
       public shipping_fee?: number;
       public negotiable?: boolean;
       public status?: string;
       static associate(models: any) {
          // define association here
-         Transaction.belongsTo(models.Room, {
+         Transaction.hasMany(models.Room, {
             as: 'room',
-            foreignKey: 'room_id',
          });
          Transaction.belongsTo(models.Product, {
             as: 'product',
@@ -45,24 +42,16 @@ module.exports = (sequelize: any, DataTypes: any) => {
    Transaction.init(
       {
          id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
+            defaultValue: DataTypes.UUIDV4,
          },
          product_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                model: 'Product',
-               key: 'id',
-            },
-         },
-         room_id: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            references: {
-               model: 'Room',
                key: 'id',
             },
          },

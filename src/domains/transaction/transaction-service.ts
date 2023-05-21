@@ -11,7 +11,7 @@ class TransactionService {
    public createTransaction = async (data: any): Promise<any> => {
       try {
          const result = await db.sequelize.transaction(
-            async (transactionData: any) => {
+            async (transactionData: any): Promise<any> => {
                const product = await db.Product.create(
                   {
                      name: data.name,
@@ -25,19 +25,9 @@ class TransactionService {
                   },
                );
 
-               const room = await db.Room.create(
-                  {
-                     seller_id: data.seller_id,
-                  },
-                  {
-                     transaction: transactionData,
-                  },
-               );
-
                const transaction = await db.Transaction.create(
                   {
                      product_id: product.id,
-                     room_id: room.id,
                      tax: data.tax,
                      negotiable: data.negotiable,
                   },
@@ -46,13 +36,23 @@ class TransactionService {
                   },
                );
 
-               return transaction.dataValues;
+               await db.Room.create(
+                  {
+                     seller_id: data.seller_id,
+                     transaction_id: transaction.id,
+                  },
+                  {
+                     transaction: transactionData,
+                  },
+               );
+
+               return transaction.id;
             },
          );
 
          const results = await db.Transaction.findOne({
             where: {
-               id: result.id,
+               id: result,
             },
             include: [
                { model: db.Product, as: 'product' },
@@ -71,7 +71,8 @@ class TransactionService {
       }
    };
 
-   public findById = async (transaction_id: number): Promise<any> => {
+   public findById = async (transaction_id: string): Promise<any> => {
+      console.info(`TF ID : ${transaction_id}`);
       return await db.Transaction.findOne({
          where: {
             id: transaction_id,
@@ -85,8 +86,8 @@ class TransactionService {
    };
 
    public updateStatus = async (
-      transaction_id: number,
-      status: number,
+      transaction_id: string,
+      status: string,
    ): Promise<boolean> => {
       db.Transaction.update(
          {
@@ -132,7 +133,7 @@ class TransactionService {
       return results;
    };
 
-   public join = async (room_id: string, user_id: number): Promise<boolean> => {
+   public join = async (room_id: string, user_id: number): Promise<any> => {
       const room = await db.Room.findOne({
          where: {
             id: room_id,
@@ -145,26 +146,11 @@ class TransactionService {
             statusCodes.BAD_REQUEST.message,
             "Buyer can't equal to seller!",
          );
-      } else {
-         db.Room.update(
-            {
-               buyer_id: user_id,
-            },
-            {
-               where: {
-                  id: room_id,
-               },
-            },
-         ).catch((err: any) => {
-            throw new BaseError(
-               FIALED_DATABASE_PROCESS,
-               statusCodes.BAD_REQUEST.message,
-               err.message.toString(),
-            );
-         });
       }
 
-      return true;
+      const transaction = await this.findById(room.id);
+
+      return transaction;
    };
 
    public nego = async (
@@ -199,7 +185,6 @@ class TransactionService {
    };
 
    public sendOrder = async (data: any): Promise<any> => {
-      console.info(`THIS TF ID : ${data.transaction_id}`);
       await db.Evidence.create({
          ...data,
          transaction_id: data.transaction_id,
@@ -209,7 +194,12 @@ class TransactionService {
          where: {
             id: data.transaction_id,
          },
-         include: [{ model: db.Evidence, as: 'evidence' }],
+         include: [
+            { model: db.Product, as: 'product' },
+            { model: db.Room, as: 'room' },
+            { model: db.Evidence, as: 'evidence' },
+         ],
+         attributes: { exclude: ['ProductId', 'RoomId'] },
       });
 
       return transaction;

@@ -1,4 +1,4 @@
-'use strict';
+('use strict');
 import { Model } from 'sequelize';
 
 interface EvidenceAttributes {
@@ -34,7 +34,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
    Evidence.init(
       {
          transaction_id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
             references: {
                model: 'Transaction',
@@ -56,11 +56,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
          evidence_pict: {
             type: DataTypes.STRING,
             allowNull: false,
-         },
-         isReturn: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
          },
       },
       {

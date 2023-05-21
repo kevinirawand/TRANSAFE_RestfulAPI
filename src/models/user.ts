@@ -1,4 +1,4 @@
-'use strict';
+('use strict');
 import { Model } from 'sequelize';
 
 interface UserAttributes {
@@ -63,7 +63,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
             type: DataTypes.STRING,
          },
          balance: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0,
          },

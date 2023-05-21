@@ -9,23 +9,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_product: {
+      product_id: {
         type: Sequelize.INTEGER
       },
-      id_room: {
+      tax: {
         type: Sequelize.INTEGER
       },
-      fee_rates: {
-        type: Sequelize.DECIMAL
+      shipping_fee: {
+        type: Sequelize.INTEGER
       },
-      method: {
-        type: Sequelize.STRING
-      },
-      ref_to: {
+      negotiable: {
         type: Sequelize.INTEGER
       },
       status: {
-        type: Sequelize.ENUM('PEMBELI_BELUM_MELAKUKAN_TRANSFER', 'PEMBELI_BERHASIL_TRANSFER', 'PENJUAL_TELAH_MENGIRIM_PRODUK', 'MENUNGGU_KONFIRMASI_SELESAI_PEMBELI', 'TRANSAKSI_TELAH_SELESAI')
+        type: Sequelize.ENUM('JOIN', 'DIBAYAR', 'DIPROSES', 'DIKIRIM', 'SELESAI', 'DIBATALKAN')
       },
       created_at: {
         allowNull: false,
