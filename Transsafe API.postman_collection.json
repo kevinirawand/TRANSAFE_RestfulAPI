@@ -1,0 +1,1191 @@
+{
+	"info": {
+		"_postman_id": "d1724597-348f-42f2-ba34-dbfef4797c5d",
+		"name": "Transsafe API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20116514"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\": \"Kevin Irawan Daniswara\",\n   \"username\": \"Kevin ID\",\n   \"phone_number\": \"6285159436455\",\n   \"email\": \"kevinid@gmail.com\",\n   \"password\": \"12345\",\n   \"passwordConfirmation\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Create a user with request body that contains the following required properties:\n\n- `name` - a **string** that represent name of user.\n- `username` - a **string** that represent username of user.\n- `phone_number` - a **string** that represent phone number, example: `6285159436455`\n- `email` - a **string** that represent email\n- `password` - a **string** password\n- `passwordConfirmation` - a **string** password for confirmation (must be same with `password`."
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Kevin Irawan Daniswara\",\n   \"username\": \"Kevin ID\",\n   \"phone_number\": \"6285159436455\",\n   \"email\": \"kevinid@gmail.com\",\n   \"password\": \"12345\",\n   \"passwordConfirmation\": \"12345\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:1337/api/v1/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1337",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "80"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"50-Tlu6bTnyQahuF9ffw43LPEkIOA8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 10:38:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"SUCCESS_REGISTER\",\n    \"status\": \"OK\",\n    \"data\": {\n        \"message\": \"Register Success!\"\n    }\n}"
+						},
+						{
+							"name": "DUPLICATED_USERNAME",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Kevin Irawan Daniswara\",\n   \"username\": \"Kevin ID\",\n   \"phone_number\": \"6285159436455\",\n   \"email\": \"kevinid@gmail.com\",\n   \"password\": \"12345\",\n   \"passwordConfirmation\": \"12345\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:1337/api/v1/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1337",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "96"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"60-/XnKNkmTCb2CjX/8mehTre0fFxQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 10:39:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"DUPLICATE_FOUND\",\n    \"status\": \"Bad Request\",\n    \"errors\": {\n        \"message\": \"Username Already Exists\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"username\": \"Kevin ID\",\n   \"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login user with request body that contains the following required properties:\n\n- `username` — a **string** that contains username of some user.\n- `password` — a **string** that contains password of some user."
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"username\": \"Kevin ID\",\n   \"password\": \"12345\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:1337/api/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1337",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "272"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"110-XaldpBhB+6OPGQbqxLm0BxaPZ0A\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 10:39:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"SUCCESS_LOGIN\",\n    \"status\": \"OK\",\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQ0MDYzNDYsImV4cCI6MTY4NDQ2MDM0Nn0.9R0LmxZYySiFgfdRkqmxSlkuGwPrpg1V8iCebxF02z4\",\n        \"refreshToken\": \"THIS_REFRESH_TOKEN\"\n    }\n}"
+						},
+						{
+							"name": "INVALID_CREDENTIALS",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"username\": \"Kevin ID\",\n   \"password\": \"123457\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:1337/api/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1337",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "96"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"60-vgmwAcRn3++zSVnYLxg5AX/nCA4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 10:40:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"INVCRED01\",\n    \"status\": \"Bad Request\",\n    \"errors\": {\n        \"message\": \"Incorect username or password\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Paymentship",
+					"item": []
+				},
+				{
+					"name": "Create a transaction",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "category",
+									"value": "fisik",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Oppo F1s",
+									"type": "text"
+								},
+								{
+									"key": "desc",
+									"value": "Testing desc xxxxxxxxxxxxxxx",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5000000",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/C:/Users/asus Pc/Pictures/Screenshots/Screenshot_20230226_014715.png"
+								},
+								{
+									"key": "negotiable",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "shipping_fee",
+									"value": "26000",
+									"type": "text"
+								},
+								{
+									"key": "weight",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "tax",
+									"value": "10000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/v1/transaction",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"v1",
+								"transaction"
+							]
+						},
+						"description": "Create a transaction with the following request body:\n\n- `category` - a **string** that represent name of user.\n- name - a **string** that represent username of user.\n- desc - a **string** that represent phone number, example: `6285159436455`\n- price - a **string**\n- negotiable - a **string**\n- shipping_fee - a **string**\n- weight\n- images\n- tax"
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Auth",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "category",
+											"value": "fisik",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Oppo F15",
+											"type": "text"
+										},
+										{
+											"key": "desc",
+											"value": "Testing desc xxxxxxxxxxxxxxxxxxxxxxxx",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "5000000",
+											"type": "text"
+										},
+										{
+											"key": "negotiable",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "shipping_fee",
+											"value": "26000",
+											"type": "text"
+										},
+										{
+											"key": "weight",
+											"value": "1000",
+											"type": "text"
+										},
+										{
+											"key": "tax",
+											"value": "10000",
+											"type": "text"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": "/C:/Users/asus Pc/Pictures/Screenshots/Screenshot_20230216_084401.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:1337/api/v1/transaction",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1337",
+									"path": [
+										"api",
+										"v1",
+										"transaction"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "664"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"298-aqSjkAaFYQD791myLQKikNakzOs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 10:41:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"SUCCESS_CREATE_TRANSACTION\",\n    \"status\": \"OK\",\n    \"data\": {\n        \"transaction\": {\n            \"id\": 6,\n            \"product_id\": 6,\n            \"room_id\": \"d7fead62-7a59-4efa-9caa-645a40834bac\",\n            \"tax\": \"10000\",\n            \"negotiable\": false,\n            \"status\": null,\n            \"createdAt\": \"2023-05-18T10:41:25.000Z\",\n            \"updatedAt\": \"2023-05-18T10:41:25.000Z\",\n            \"product\": {\n                \"id\": 6,\n                \"name\": \"HP Samsung A05s\",\n                \"price\": \"2500000\",\n                \"category\": \"fisik\",\n                \"desc\": \"Samsung A05s 4/64 minus pemakaian\",\n                \"images\": \"./images/test.png\",\n                \"createdAt\": \"2023-05-18T10:41:25.000Z\",\n                \"updatedAt\": \"2023-05-18T10:41:25.000Z\"\n            },\n            \"room\": {\n                \"id\": \"d7fead62-7a59-4efa-9caa-645a40834bac\",\n                \"seller_id\": 1,\n                \"buyer_id\": null,\n                \"createdAt\": \"2023-05-18T10:41:25.000Z\",\n                \"updatedAt\": \"2023-05-18T10:41:25.000Z\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get one transaction",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/v1/transaction/{{transaction_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"{{transaction_id}}"
+							],
+							"query": [
+								{
+									"key": "transaction_id",
+									"value": "26",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:1337/api/v1/transaction/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1337",
+									"path": [
+										"api",
+										"v1",
+										"transaction",
+										"6"
+									],
+									"query": [
+										{
+											"key": "transaction_id",
+											"value": "{{transaction_id}}",
+											"description": "Transaction ID",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "660"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"294-HXbeTal/fv6N8639d7+pk6G51jg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 10:42:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"SUCCESS_GET_ONE_TRANSACTION\",\n    \"status\": \"OK\",\n    \"data\": {\n        \"result\": {\n            \"id\": 6,\n            \"product_id\": 6,\n            \"room_id\": \"d7fead62-7a59-4efa-9caa-645a40834bac\",\n            \"tax\": \"10000\",\n            \"negotiable\": false,\n            \"status\": null,\n            \"createdAt\": \"2023-05-18T10:41:25.000Z\",\n            \"updatedAt\": \"2023-05-18T10:41:25.000Z\",\n            \"product\": {\n                \"id\": 6,\n                \"name\": \"HP Samsung A05s\",\n                \"price\": \"2500000\",\n                \"category\": \"fisik\",\n                \"desc\": \"Samsung A05s 4/64 minus pemakaian\",\n                \"images\": \"./images/test.png\",\n                \"createdAt\": \"2023-05-18T10:41:25.000Z\",\n                \"updatedAt\": \"2023-05-18T10:41:25.000Z\"\n            },\n            \"room\": {\n                \"id\": \"d7fead62-7a59-4efa-9caa-645a40834bac\",\n                \"seller_id\": 1,\n                \"buyer_id\": null,\n                \"createdAt\": \"2023-05-18T10:41:25.000Z\",\n                \"updatedAt\": \"2023-05-18T10:41:25.000Z\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update status transaction",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"status\": \"JOIN\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/v1/transaction/transaction_id=26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"transaction_id=26"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"status\": \"JOIN\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:1337/api/v1/transaction/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1337",
+									"path": [
+										"api",
+										"v1",
+										"transaction",
+										"6"
+									],
+									"query": [
+										{
+											"key": "transaction_id",
+											"value": "{{transaction_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "100"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"64-YGF2CrUxFf688HUqK7EPU64Pja4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 10:44:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"SUCCESS_UPDATE_TRANSACTION\",\n    \"status\": \"OK\",\n    \"data\": {\n        \"message\": \"Update Transaction Success!\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get recent transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiS2V2aW4gSUQiLCJpYXQiOjE2ODQyNjk0NzIsImV4cCI6MTY4NDg3NDI3Mn0.X8kzo1vys3ODvXj16grVPC2a753s_vhIVluYUtzT4uI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1337/api/v1/transaction/recent/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"recent",
+								"2"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:1337/api/v1/transaction/recent/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1337",
+									"path": [
+										"api",
+										"v1",
+										"transaction",
+										"recent",
+										"1"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "{{user_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "668"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29c-TeZ7NCz/cVllEYbY34ZNKJbrrwM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 10:44:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"SUCCESS_GET_RECENT_TRANSACTION\",\n    \"status\": \"OK\",\n    \"data\": {\n        \"results\": [\n            {\n                \"id\": 6,\n                \"product_id\": 6,\n                \"room_id\": \"d7fead62-7a59-4efa-9caa-645a40834bac\",\n                \"tax\": \"10000\",\n                \"negotiable\": false,\n                \"status\": \"JOIN\",\n                \"createdAt\": \"2023-05-18T10:41:25.000Z\",\n                \"updatedAt\": \"2023-05-18T10:44:19.000Z\",\n                \"product\": {\n                    \"id\": 6,\n                    \"name\": \"HP Samsung A05s\",\n                    \"price\": \"2500000\",\n                    \"category\": \"fisik\",\n                    \"desc\": \"Samsung A05s 4/64 minus pemakaian\",\n                    \"images\": \"./images/test.png\",\n                    \"createdAt\": \"2023-05-18T10:41:25.000Z\",\n                    \"updatedAt\": \"2023-05-18T10:41:25.000Z\"\n                },\n                \"room\": {\n                    \"id\": \"d7fead62-7a59-4efa-9caa-645a40834bac\",\n                    \"seller_id\": 1,\n                    \"buyer_id\": null,\n                    \"createdAt\": \"2023-05-18T10:41:25.000Z\",\n                    \"updatedAt\": \"2023-05-18T10:41:25.000Z\"\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Join transaction",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoiYWJkdWxsYWgiLCJpYXQiOjE2ODQ0MDY4ODksImV4cCI6MTY4NDQ2MDg4OX0.E3oMcKeziJbMn9VdDDDeUEKZ56EQ7F3Konz5eeLLd6s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/v1/transaction/{{transaction_id}}/join/{{room_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"{{transaction_id}}",
+								"join",
+								"{{room_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"collection\": {\n        \"info\": {\n            \"name\": \"{{collectionName}}\",\n            \"schema\": \"{{collectionSchemaUrl}}\"\n        },\n        \"item\": [\n            {\n                \"request\": {}\n            }\n        ]\n    }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:1337/api/v1/transaction/join/d7fead62-7a59-4efa-9caa-645a40834bac",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1337",
+									"path": [
+										"api",
+										"v1",
+										"transaction",
+										"join",
+										"d7fead62-7a59-4efa-9caa-645a40834bac"
+									],
+									"query": [
+										{
+											"key": "room_id",
+											"value": "{{room_id}}",
+											"description": "Optional. A workspace ID in which to create the collection.\n\nIf you do not include this query parameter, the system creates the collection in your \"My Workspace\" workspace.",
+											"disabled": true
+										},
+										{
+											"key": "room_id",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "96"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"60-x79g3aWKUgAoXRHc91tXWcsFQik\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 10:48:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"SUCCESS_JOIN_TRANSACTION\",\n    \"status\": \"OK\",\n    \"data\": {\n        \"message\": \"Success join transaction!\"\n    }\n}"
+						},
+						{
+							"name": "ERROR",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"collection\": {\n        \"info\": {\n            \"name\": \"{{collectionName}}\",\n            \"schema\": \"{{collectionSchemaUrl}}\"\n        },\n        \"item\": [\n            {\n                \"request\": {}\n            }\n        ]\n    }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:1337/api/v1/transaction/join/d7fead62-7a59-4efa-9caa-645a40834bac",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1337",
+									"path": [
+										"api",
+										"v1",
+										"transaction",
+										"join",
+										"d7fead62-7a59-4efa-9caa-645a40834bac"
+									],
+									"query": [
+										{
+											"key": "room_id",
+											"value": "1",
+											"description": "Required",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "102"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"66-Nba9UeanhKcvE52pPLXLVrbhjFc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 10:47:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"INVALID_IDENTITY\",\n    \"status\": \"Bad Request\",\n    \"errors\": {\n        \"message\": \"Buyer can't equal to seller!\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Join Confirmation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:1337/api/v1/transaction/confirm_join/{{room_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"confirm_join",
+								"{{room_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

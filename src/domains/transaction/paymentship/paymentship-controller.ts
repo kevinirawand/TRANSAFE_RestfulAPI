@@ -39,7 +39,7 @@ class PaymentshipController {
       res: Response,
    ): Promise<Response> => {
       const transaction = await TransactionService.findById(
-         parseInt(req.params.transaction_id || '-1'),
+         req.params.transaction_id || '-1',
       );
 
       // console.info(transaction);
@@ -61,7 +61,7 @@ class PaymentshipController {
       const snap = await PaymentshipService.createSnap(payloads);
 
       await TransactionService.updateStatus(
-         parseInt(req.params.transaction_id || '-1'),
+         req.params.transaction_id || '-1',
          'DIBAYAR',
       );
 

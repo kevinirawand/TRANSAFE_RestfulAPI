@@ -9,7 +9,7 @@ class NegoController {
    ): Promise<Response> => {
       if (req.params.status === 'accept') {
          const transaction = await TransactionService.findById(
-            parseInt(req.params.transaction_id || ''),
+            req.params.transaction_id || '',
          );
 
          await db.Product.update(
