@@ -16,7 +16,7 @@ class AuthController {
       if (user) {
          throw new BaseError(
             DUPLICATE_FOUND,
-            statusCodes.BAD_REQUEST.message,
+            statusCodes.DUPLICATE.message,
             'Username Already Exists',
          );
       }

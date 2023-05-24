@@ -19,4 +19,8 @@ export default {
       code: 403,
       message: 'No Access',
    },
+   DUPLICATE: {
+      code: 450,
+      message: 'Duplicate Found',
+   },
 };
