@@ -1,7 +1,0 @@
-npm install -g npm
-npm config set registry https://registry.npmjs.org/
-npm cache clean --force
-npm i
-npm i typescript
-npx tsc
-npm run start:dev
