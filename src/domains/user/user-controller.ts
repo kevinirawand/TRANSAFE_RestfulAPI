@@ -10,6 +10,7 @@ class UserController implements IController {
          code: 'SUCCESS_GET_ALL_USERS',
          status: 'OK',
          data: {
+            message: 'TESTING FROM STAGING',
             users,
          },
       });
