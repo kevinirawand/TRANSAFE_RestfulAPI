@@ -23,4 +23,8 @@ export default {
       code: 450,
       message: 'Duplicate Found',
    },
+   INVALID_PARAMS: {
+      code: 477,
+      message: 'Params Format Not Registered In Application',
+   },
 };

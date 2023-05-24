@@ -9,3 +9,4 @@ export const FIALED_DATABASE_PROCESS: string = 'FAILED_DATABASE_PROCESS';
 export const INVALID_IDENTITY: string = 'INVALID_IDENTITY';
 export const MIDTRANS_ERROR: string = 'PAYMENTSHIP_FAILED';
 export const NULL_DATA: string = 'NULL_DATA';
+export const INVALID_PARAMS: string = 'INVALID_PARAMS_FORMAT';

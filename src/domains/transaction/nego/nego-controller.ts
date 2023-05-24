@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import TransactionService from '../transaction-service';
 import db from '../../../models';
+import BaseError from '../../../errors/error-mockup';
+import { INVALID_PARAMS } from '../../../errors/error-codes';
+import statusCodes from '../../../errors/status-codes';
 
 class NegoController {
    public negoHandler = async (
@@ -30,15 +33,21 @@ class NegoController {
                message: 'Nego accepted by seller',
             },
          });
+      } else if (req.params.status === 'decline') {
+         return res.status(200).json({
+            code: 'NEGO_DECLINED',
+            status: 'OK',
+            data: {
+               message: 'Nego declined by seller',
+            },
+         });
+      } else {
+         throw new BaseError(
+            INVALID_PARAMS,
+            statusCodes.INVALID_PARAMS.message,
+            'invalid Status Params value',
+         );
       }
-
-      return res.status(200).json({
-         code: 'NEGO_DECLINED',
-         status: 'OK',
-         data: {
-            message: 'Nego declined by seller',
-         },
-      });
    };
 }
 

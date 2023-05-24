@@ -178,15 +178,19 @@ class TransactionController {
       req: Request,
       res: Response,
    ): Promise<Response> => {
+      TransactionService.updateStatus(
+         req.params.transaction_id || '',
+         'DIPROSES',
+      );
+
       const transaction = await TransactionService.findById(
          req.params.transaction_id || '',
       );
 
-      const buyerDetail = await UserService.findById(transaction.room.buyer_id);
+      console.info(transaction);
 
-      TransactionService.updateStatus(
-         req.params.transaction_id || '',
-         'DIPROSES',
+      const buyerDetail = await UserService.findById(
+         transaction.room[0].buyer_id,
       );
 
       return res.status(200).json({
@@ -206,32 +210,33 @@ class TransactionController {
       const obj = JSON.parse(JSON.stringify({ ...req.files }));
 
       /**COMMENT THIS TO TEST VIA REST CLIENT */
-      // if (!obj.evidence_pict) {
-      //    return res.status(400).json({
-      //       code: INVALID_CREDENTIALS,
-      //       status: statusCodes.BAD_REQUEST.message,
-      //       errors: {
-      //          evidence_pict: ['evidence_pict is required'],
-      //       },
-      //    });
-      // }
+      if (!obj.evidence_pict) {
+         return res.status(400).json({
+            code: INVALID_CREDENTIALS,
+            status: statusCodes.BAD_REQUEST.message,
+            errors: {
+               evidence_pict: ['evidence_pict is required'],
+            },
+         });
+      }
 
       /**COMMENT THIS TO TEST VIA REST CLIENT */
-      // const data = {
-      //    shipping_name: req.body.shipping_name,
-      //    resi: req.body.resi,
-      //    desc: req.body.desc,
-      //    evidence_pict: obj.evidence_pict[0].path.toString(),
-      // };
-
-      /**ACTIVED THIS COMMENT AND COMMENT DATA ABOVE TO TEST VIA REST CLIENT */
       const data = {
          shipping_name: req.body.shipping_name,
          resi: req.body.resi,
          desc: req.body.desc,
-         evidence_pict: req.body.evidence_pict,
+         evidence_pict: obj.evidence_pict[0].path.toString(),
          transaction_id: req.params.transaction_id,
       };
+
+      /**ACTIVED THIS COMMENT AND COMMENT DATA ABOVE TO TEST VIA REST CLIENT */
+      // const data = {
+      //    shipping_name: req.body.shipping_name,
+      //    resi: req.body.resi,
+      //    desc: req.body.desc,
+      //    evidence_pict: req.body.evidence_pict,
+      //    transaction_id: req.params.transaction_id,
+      // };
 
       const transactionWithEvidence = await TransactionService.sendOrder(data);
 

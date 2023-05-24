@@ -160,6 +160,14 @@ class TransactionService {
          },
       });
 
+      if (room.seller_id == user_id) {
+         throw new BaseError(
+            INVALID_IDENTITY,
+            statusCodes.BAD_REQUEST.message,
+            "Buyer can't equal to seller!",
+         );
+      }
+
       db.Room.update(
          {
             buyer_id: user_id,
@@ -228,6 +236,8 @@ class TransactionService {
          ],
          attributes: { exclude: ['ProductId', 'RoomId'] },
       });
+
+      // update status = dikirim
 
       return transaction;
    };
