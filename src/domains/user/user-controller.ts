@@ -6,6 +6,7 @@ class UserController implements IController {
    async index(req: Request, res: Response): Promise<Response> {
       const users = await UserService.getAll();
 
+      return res.send('Staging Test');
       return res.status(200).json({
          code: 'SUCCESS_GET_ALL_USERS',
          status: 'OK',

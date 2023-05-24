@@ -5,7 +5,7 @@ import tryCatch from '../../utils/tryCatcher';
 
 class UserRoutes extends BaseRoutes {
    public routes(): void {
-      this.router.get('/', [authToken], tryCatch(UserController.index));
+      this.router.get('/', tryCatch(UserController.index));
       this.router.post('/create', tryCatch(UserController.create));
       this.router.get('/show/:user_id', tryCatch(UserController.show));
       this.router.put('/update/:user_id', tryCatch(UserController.update));
