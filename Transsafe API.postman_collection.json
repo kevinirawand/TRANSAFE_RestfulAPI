@@ -756,7 +756,7 @@
 								{
 									"key": "images",
 									"type": "file",
-									"src": "/C:/Users/asus Pc/Pictures/Screenshots/Screenshot_20230226_014715.png"
+									"src": "/C:/Users/asus Pc/Pictures/Screenshots/Screenshot_20230226_014753.png"
 								},
 								{
 									"key": "negotiable",
@@ -1948,6 +1948,97 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"code\": \"INVCRED01\",\n    \"status\": \"Bad Request\",\n    \"errors\": {\n        \"evidence_pict\": [\n            \"evidence_pict is required\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Transaction Finish",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}:{{PORT}}/api/{{VERSION}}/transaction/{{transaction_id}}/transaction_finish",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"transaction",
+								"{{transaction_id}}",
+								"transaction_finish"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCCESS",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Auth",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{BASE_URL}}:{{PORT}}/api/{{VERSION}}/transaction/{{transaction_id}}/transaction_finish",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"api",
+										"{{VERSION}}",
+										"transaction",
+										"{{transaction_id}}",
+										"transaction_finish"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "87"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"57-XQaAEU7CGriF7XeDcB30U7qiKCY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 25 May 2023 14:17:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"TRANSACTION_FINISH\",\n    \"status\": \"OK\",\n    \"data\": {\n        \"message\": \"Transaction Succesfuly\"\n    }\n}"
 						}
 					]
 				}
