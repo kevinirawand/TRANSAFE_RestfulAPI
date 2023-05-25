@@ -7,8 +7,6 @@ import jwt from 'jsonwebtoken';
 const authToken = (req: Request, res: Response, next: NextFunction): any => {
    const authHeader: string | undefined = req.get('X-Auth');
 
-   console.info(`TOKEN : ${authHeader}`);
-
    const token: string | undefined = authHeader && authHeader.split(' ')[1];
 
    if (token == null)
