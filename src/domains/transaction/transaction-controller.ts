@@ -4,6 +4,7 @@ import BaseError from '../../errors/error-mockup';
 import UserService from '../user/user-service';
 import { INVALID_CREDENTIALS } from '../../errors/error-codes';
 import statusCodes from '../../errors/status-codes';
+import UserService from '../user/user-service';
 
 class TransactionController {
    public createTransaction = async (
@@ -37,6 +38,7 @@ class TransactionController {
          images: obj.images[0].path.toString(),
          tax: req.body.tax,
          seller_id: req.app.locals.user.userId,
+         shipping_fee: req.body.shipping_fee,
       };
 
       /**
@@ -245,6 +247,34 @@ class TransactionController {
          status: 'OK',
          data: {
             transactionWithEvidence,
+         },
+      });
+   };
+
+   public transactionFinish = async (
+      req: Request,
+      res: Response,
+   ): Promise<Response> => {
+      const transaction = await TransactionService.findById(
+         req.params.transaction_id || '',
+      );
+      await TransactionService.updateStatus(
+         req.params.transaction_id || '',
+         'SELESAI',
+      );
+
+      // price product + shpping_fee
+      const balance = transaction.shipping_fee + transaction.product.price;
+
+      await UserService.update(transaction.room[0].seller_id, {
+         balance: balance,
+      });
+
+      return res.status(200).json({
+         code: 'TRANSACTION_FINISH',
+         status: 'OK',
+         data: {
+            message: 'Transaction Succesfuly',
          },
       });
    };

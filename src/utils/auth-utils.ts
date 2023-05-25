@@ -22,7 +22,7 @@ class AuthUtils {
          },
          process.env.ACCESS_TOKEN_SECRET_KEY || '',
          {
-            expiresIn: '15h',
+            expiresIn: '7d',
          },
       );
 

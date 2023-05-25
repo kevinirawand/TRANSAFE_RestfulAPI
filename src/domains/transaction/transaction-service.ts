@@ -30,6 +30,7 @@ class TransactionService {
                      product_id: product.id,
                      tax: data.tax,
                      negotiable: data.negotiable,
+                     shipping_fee: data.shipping_fee,
                   },
                   {
                      transaction: transactionData,
