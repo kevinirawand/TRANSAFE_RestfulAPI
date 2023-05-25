@@ -26,7 +26,7 @@ class TransactionRoute extends BaseRoutes {
       );
 
       this.router.get(
-         '/recent/:user_id',
+         '/recent/',
          [authToken],
          tryCatch(TransactionController.getRecentTransaction),
       );
