@@ -105,7 +105,7 @@ class TransactionController {
       res: Response,
    ): Promise<Response> => {
       const results = await TransactionService.getRecent(
-         req.app.locals.user.userId,
+         parseInt(req.params.user_id || ''),
       );
 
       return res.status(200).json({

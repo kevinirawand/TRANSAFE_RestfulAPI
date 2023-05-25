@@ -129,7 +129,6 @@ class TransactionService {
       });
 
       console.info(`CURRENT USER LOGIN : ${user_id}`);
-      console.info(results);
 
       return results;
    };

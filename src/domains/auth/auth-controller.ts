@@ -65,6 +65,7 @@ class AuthController {
          code: 'SUCCESS_LOGIN',
          status: 'OK',
          data: {
+            user_id: user.id,
             accessToken: accessToken,
             refreshToken: 'THIS_REFRESH_TOKEN',
          },
