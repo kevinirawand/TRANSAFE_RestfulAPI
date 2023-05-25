@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import TransactionService from './transaction-service';
 import BaseError from '../../errors/error-mockup';
-import UserService from '../user/user-service';
 import { INVALID_CREDENTIALS } from '../../errors/error-codes';
 import statusCodes from '../../errors/status-codes';
 import UserService from '../user/user-service';
