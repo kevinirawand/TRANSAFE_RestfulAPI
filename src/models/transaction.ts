@@ -4,6 +4,7 @@ import { Model } from 'sequelize';
 interface TransactionAttributes {
    id: string;
    product_id: number;
+   room_id: number;
    tax: number;
    shipping_fee?: number;
    negotiable?: boolean;
@@ -21,14 +22,16 @@ module.exports = (sequelize: any, DataTypes: any) => {
        */
       public id!: string;
       public product_id!: number;
+      public room_id!: number;
       public tax!: number;
       public shipping_fee?: number;
       public negotiable?: boolean;
       public status?: string;
       static associate(models: any) {
          // define association here
-         Transaction.hasMany(models.Room, {
+         Transaction.belongsTo(models.Room, {
             as: 'room',
+            foreignKey: 'room_id',
          });
          Transaction.belongsTo(models.Product, {
             as: 'product',
@@ -52,6 +55,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
             allowNull: false,
             references: {
                model: 'Product',
+               key: 'id',
+            },
+         },
+         room_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+               model: 'Room',
                key: 'id',
             },
          },

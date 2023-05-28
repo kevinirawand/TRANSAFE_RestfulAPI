@@ -25,22 +25,22 @@ class TransactionService {
                   },
                );
 
-               const transaction = await db.Transaction.create(
+               const room = await db.Room.create(
                   {
-                     product_id: product.id,
-                     tax: data.tax,
-                     negotiable: data.negotiable,
-                     shipping_fee: data.shipping_fee,
+                     seller_id: data.seller_id,
                   },
                   {
                      transaction: transactionData,
                   },
                );
 
-               await db.Room.create(
+               const transaction = await db.Transaction.create(
                   {
-                     seller_id: data.seller_id,
-                     transaction_id: transaction.id,
+                     product_id: product.id,
+                     room_id: room.id,
+                     tax: data.tax,
+                     negotiable: data.negotiable,
+                     shipping_fee: data.shipping_fee,
                   },
                   {
                      transaction: transactionData,
@@ -59,7 +59,7 @@ class TransactionService {
                { model: db.Product, as: 'product' },
                { model: db.Room, as: 'room' },
             ],
-            attributes: { exclude: ['ProductId', 'RoomId'] },
+            attributes: { exclude: ['ProductId'] },
          });
 
          return results;
